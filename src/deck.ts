@@ -19,6 +19,8 @@ class Deck {
 
   public constructor
   (cards: object) {
+
+    
     this.cards = cards
   }
 }
