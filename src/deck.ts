@@ -11,10 +11,15 @@ const differentValues: {
 };
 
 class Deck {
-  public cards: object;
 
-  public constructor(cards: object) {
-    this.cards = cards;
+
+
+  public cards: 
+  object;
+
+  public constructor
+  (cards: object) {
+    this.cards = cards
   }
 }
 
