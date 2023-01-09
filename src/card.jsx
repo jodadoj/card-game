@@ -7,11 +7,7 @@ export function Card(props) {
   return (
     <RigidBody
       colliders="hull"
-      position={[
-        3 - Math.random() * 6,
-        3 - Math.random() * 6,
-        3 - Math.random() * 6
-      ]}
+      position={[Math.random() * 200, Math.random() * 200, Math.random() * 200]}
     >
       <group {...props} dispose={null}>
         <mesh
