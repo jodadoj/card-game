@@ -6,11 +6,15 @@
 
 Other trial names for the stages in play are puns involving ante and some olden word for preceeding an event.
 
+## Brief
+
+A game of [Mafia](https://en.wikipedia.org/wiki/Mafia_(party_game)) where every player is on both sides, driven through a game of poker. All players are assigning themselves roles and alligences as rounds progress and the game is both a task to not lose within poker (repeated passes/folds losing lives, going negative or having the worse hand) and to not incur suspicious or ire of other players while doing so.
+
 ## Premise:
 
 Background: A mystical games for money and souls in hell
 
-Players are dammed entities that must gamble with their lives in order to be released from purgatory
+Players are dammed entities that must gamble with their lives in order to be released from purgatory, the dammed
 
 An endless loop of winning and losing time in hell
 
@@ -22,7 +26,7 @@ Concept art designs are thus far a long, greasy haired boy with glowing red eyes
 
   Mammon is many interpretations regretful of his status as a fallen angel and is also replaced by [Plutus](https://en.wikipedia.org/wiki/Plutus) at points usually depicted as youthful if not an infant which inspires this description
   
-  Current design is simply a yellow version of the player model, can add lights around him for effect
+  Current MVP design is simply a yellow version of the player model, can add lights around him for effect
   
   A full MVP would likely want to see a a better Mammon render as the "main character" of the "storyline"
 
@@ -30,15 +34,15 @@ Concept art designs are thus far a long, greasy haired boy with glowing red eyes
 
 Generally inspired by depiction of the [Fourth Cicle of Hell](https://en.wikipedia.org/wiki/Inferno_(Dante)#Fourth_Circle_(Greed))as a duelling ring
 
-Player are watched by unseen entities in a dimly lit room as the surround a table with a flame under a chandelier
+Dammed are watched by unseen entities in a dimly lit room as the surround a table with a flame under a chandelier
 
 Light assets? Maybe actual eyes later but dim lights that move should be enough
 	
-  The fire represent the [Morning Star](https://en.wikipedia.org/wiki/Lucifer) as the symbol of Lucifer, King of Hell, and pride
+The fire should represent the [Morning Star](https://en.wikipedia.org/wiki/Lucifer) as the symbol of Lucifer, King of Hell, and pride
   
 Everything on the table comes from and dissapears into the fire
 
-  A simple asset (perhaps another bright light) but pivotal to the game structure as a major piece
+A simple asset (perhaps another bright light) but pivotal to the game structure as a major piece
   
 Also important are the mechanics of the play table 
 
@@ -48,7 +52,7 @@ Also important are the mechanics of the play table
  
 Each player (refered to henceforth as the dammed) has different colours and possibly clothing (later build, easy to control material colour first via props)
 
-  When players lose they are burned by the flame in the center by Mammon pointing at them
+  When dammed lose they are burned by the flame in the center by Mammon pointing at them
   
 MVP doesn't need burning animation, sfx and light flash is enough
     
@@ -94,66 +98,81 @@ Preload animations here and an exit lobby onClick prior to this
 
 Thinking of fog and walking damned in it that increase as time goes on
 
-Mammon insulting the player from up high planned in later builds
+Mammon insulting the dammed from up high planned in later builds
 
 When game loads the dammed sees their character emerge from the wandering avatars, gain a colour and walk in a "door" that is a shining hole in reality with the playroom on the other side
 
 Essentially just a large black plane with a hole in it
 
-
 ## Notes on the playroom and players
 
 Each should have a distinct colour to be easily remembered
 
-Should be universal to the table
+Should be universal to the table in order to have a clear way for each player to rmember each other player other than name
 
-Perhaps players should choose clothing and horn type, something that carries over in aesthetic
+Dammed should choose clothing and horn type, something that carries over in aesthetic so they feel connected to their character
 
-Playroom has mammon above, a record player with an old horn and the table as well as several chairs
+Playroom has mammon above, a record player with an old horn and the table as well as several chairs, dimmly lit and dark
 
-The table is the most interesting thing
+The table area is the most interesting thing and basically the only thing in the room that matters
 
-Has a fire in the centre where everything comes from
+Has a fire in the centre where everything comes from (origin point, hidden contructor and destroy box for models)
 
-Each player is chained to the bottom
+Each dammed is chained to the bottom of this table, doesn't affect anything but for enviromental storytelling purposes, chains in MVP don't need to exist or be animated but would help thematically
 
-Sparks fly when actions happen or cards brush against
+In later builds particle effects should tested so sparks fly when actions happen or cards brush against the table. In MVP and early builds whatever is least resource or time intensive is placeholder for fire and lighting effects
 
-chains break out to restrain players from the tabletop when trials occur
+Also further chains could be added to break out to restrain dammed from the tabletop when trials occur in later builds (see below) but current build just needs a clear destignation of every game state rather than full theatre. All that is important is that Mammon drops down then every dammed is restrained
 
-If Mammon drops down then every player is restrained
+## losing
 
-He usually hangs above and will pull out a pocket watch with an eye to sine on losing players
+When a dammed loses the game they are removed from the designation of player in the database and their soul destroyeed by mammon
 
-Destroys their physical presence completely leaving a floating blob (spectator)
+He usually hangs above and will point at losing players for drama and flow
 
-They can leave at this point or stay for the final round
+Destroys their physical presence completely leaving a floating blob (this is a spectator hearby refered to as a lost soul)
 
-## Animations to play 
+They can leave at this point or stay for the final round (see below)
 
-Players sit around table
+## Animations to play during MVP
 
-Set a position and id during this
+Dammed sit around table
 
-Position needs to change each round
+		Set a position and id during this
 
-id is a primary key/identifier that's constant for the game
+		Position needs to change each round
+
+		id is a primary key/identifier that's constant for the game
+
+General card animations
+
+		Can be mostly unseen or controlled via react three fibra basic controls
 
 Deck is created from fire in center
 
-Load 52 cards fresh and unaltered
+		The fire is our original point in the canvas for simplicity, the camera is offset so all animations should start and finish there and be offset to neat angles towards the ends of the table 
+		
+		Cards themeselves may float and not be visible by other players or touched by other models. Animations should general not include models interacting in complex ways for MVP at all.
 
-I believe this also can be a database that then links to an array or something from JSON data
+		When this happens we load 52 cards fresh and unaltered using createDeckArray() in deck.js
 
-Needs to be alterable over network so 52 entiries that are mapped out to a function that creates models and sets which model goes where
+		Can link this to a database that then links to an array or something from JSON data so players across a network use the same cards
+
+		Needs to be alterable over network so 52 entiries that are mapped out to a function that creates models and sets which texture goes where. A Card.JSX component.
 
 Table spins and Dealer is chosen
 
-Set dealerId from random selection of players
+		Set dealerId from random selection of players
 
-dealerId changes evbery round
+		dealerId changes evbery round
 
-# DEALING - Antebrachium - before conflict
+
+
+Mammon "flight" and pointing
+
+		For loss and victory
+
+# DEALING - Ante-brachium - before conflict
 
 ## Players options (under design) 
 
@@ -180,47 +199,53 @@ can be observed by those with the cards
 
 insert new version of card (duplicate)
 
-basically makes it easier to accuse a player of cheating if they have a good hand
+basically makes it easier to accuse a dammed of cheating if they have a good hand
 
 low risk option
 
 rig the shuffle
 
-They can give certain players certain hands
+They can give certain dammed certain hands
 
 The dealer needs certain protections otherwise it's too easy to accuse them
 
 # IN PLAY - Antepartum - before birth
 
-Need a certain amount of time given to allow actions
+Need a certain amount of time given to allow actions and points to perform them:
 
-Players can cheat further
+Dammed can cheat further
 
-Players can send each other hidden messages by purchasing the means from their shares
+Dammed can send each other hidden messages by purchasing the means from their shares
 
-flies of beelezebub - hidden simple instructions, tracable, non-binding
+		flies of beelezebub - hidden simple instructions, tracable, non-binding
+		
+			Can send in order to create suggestions but they don't hold up in trials
 
-letters from [Mephistopheles' pen](https://en.wikipedia.org/wiki/Mephistopheles) - Faustian bargains which must be upheld and kept secret
+		letters from [Mephistopheles' pen](https://en.wikipedia.org/wiki/Mephistopheles) - Faustian bargains which must be upheld and kept secret
+			
+			Dammed cannot accuse another they have signed a full contract with and must act in their favour until specified round
 
-Players can watch other players for a chance to catch them
+Dammed can watch other dammed for a chance to catch them
 
 There's a period where no one can watch the dealer 
 
 No one can see the people directly in front of them due to the fire
 
-Players can create distractions by interacting with the enviroment
+Dammed can create distractions by interacting with the enviroment (later build, unnecessary for MVP)
 
-later build, unnecessary for MVP
-
-Players can hide their actions more carefully
+Dammed can hide their actions more carefully
 
 Need a sort of action point and chance of detection system
 
-Players should also be allowed to force an end to a round
+Dammed should also be allowed to force an end to a round
 
 As usual a majority vote
 
-In later builds players should be given random insecentives by kings and princes of hell to act in a certain way for more money (hidden from others) or cards or other tools
+In later builds dammed should be given random insecentives by kings and princes of hell to act in a certain way for more money (hidden from others) or cards or other tools
+
+		This of these as the extended roles in mafia
+		
+		Not necessarily a crime to fulfil these tasks and dammed should be able to reveal their contracts but they should create a target on their backs in some way through game theory
 
 ## BETTING
 
@@ -232,7 +257,7 @@ Needs a trial run at this point to understand dynamics in actual play - basicall
 
 Current thoughts are no betting for the start of play, freely allowed betting for the rest and a deadlien to bet and not fold by default
 
-The crime of sloth
+	The crime of sloth
 
 # REVEAL - antebellum - before war
 
@@ -244,17 +269,17 @@ Unless...
 
 # ACCUSATION
 
-In this a player is accused of cheating
+In this a dammed is accused of cheating
 
 There are three types of accusation planned:
 
-## Opening - A player opens the floor to the accusation of another player
+## Opening - A dammed opens the floor to the accusation of another 
 
 Evidence can be falsified
 
 Not all is availible
 
-## Counter - The player responds to an opening with evidence pointing to another player
+## Counter - The dammed respond to an opening with evidence pointing to another dammed
 
 Hard evidence is required
 
@@ -262,7 +287,7 @@ Does not remove them from being voted but introduces a new player to the mix
 
 Only one can be voted off at a time
 
-Requires 2/3< players to vote for a person
+Requires 2/3< of table to vote for a person or the losing hands are ejected
 
 ## Trial - Mammon is summoned to directly use hard evidence to convict a voted party of a certain crime
 
@@ -270,7 +295,7 @@ Evidence is unfalsifiable and guilt is proof of crime
 
 Important to note which evidence is binding and viewable by Mammon in this way as some "crimes" can't be proven
 
-Players have no input beyond the choice of what to look for and whether they believe someone is guilty or innocent before evidence is counted
+Dammed have no input beyond the choice of what to look for and whether they believe someone is guilty or innocent before evidence is counted
 
 Those who lose the bet lose half the pot
 
@@ -282,13 +307,13 @@ Has the chance to wipe out all players
 
 Fewer people required to make it go
 
-A player should only be able to be accused once per game in any singular way unless overwritten by a trial (double jeopardy)
+A dammed should only be able to be accused once per game in any singular way unless overwritten by a trial (double jeopardy) in order to avoid targetting a certain player repeatedly or encouraging random accusations
 
 Accusations should come before revealed hands
 
 # Final round - a final game before death - ANTE MORTEM
 
-The final round should be a game between two players
+The final round should be a game between two dammed
 
 This is not to be implemented within this MVP but is planned along with a spectator function for those who lose in earlier round
 
@@ -296,24 +321,11 @@ Essentially would want to have gaseous masses or lights floating and viewing the
 
 Both to learn from better players and also perhaps bet further amongst themselves on a winner
 
-Spectators would select a game by majority vote or randomly if not enough people or too late in response
+Lost souls would select a game by majority vote or randomly if not enough people or too late in response
 
-Games would be a selection from outside card games]
+Games would be a selection from outside card games
 
-Spectators would have dealer like abilities to affect the games, essentially cheating in favour of someone
-
-Would require expanding the scope outside of card game
-
-Mainly done as most of the cheating elements would become stale between two people and one on one would make the game eventually too focused on a PvP competitive rather than a party/PvE/group based game as is intended
-
-The act of considering the people who lose can either act randomly to some extent 
-
-Also is a reward for those who continue to stay involved in games beyond their own loss
-
-Encourages people to see games through and see correct play for establishing metas
-
-
-Victory - Antephialtic - to end a nightmare
+# Victory - Antephialtic - to end a nightmare
 
 Experience of some kind and a change in rank
 
