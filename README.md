@@ -32,7 +32,7 @@ Generally inspired by depiction of the [Fourth Cicle of Hell](https://en.wikiped
 
 Player are watched by unseen entities in a dimly lit room as the surround a table with a flame under a chandelier
 
-	Light assets? Maybe actual eyes later but dim lights that move should be enough
+Light assets? Maybe actual eyes later but dim lights that move should be enough
 	
   The fire represent the [Morning Star](https://en.wikipedia.org/wiki/Lucifer) as the symbol of Lucifer, King of Hell, and pride
   
@@ -50,9 +50,9 @@ Each player (refered to henceforth as the dammed) has different colours and poss
 
   When players lose they are burned by the flame in the center by Mammon pointing at them
   
-    MVP doesn't need burning animation, sfx and light flash is enough
+MVP doesn't need burning animation, sfx and light flash is enough
     
-    Symbolism is a of Pride becoming [Wrath](https://en.wikipedia.org/wiki/Satan) as they drop out
+Symbolism is a of Pride becoming [Wrath](https://en.wikipedia.org/wiki/Satan) as they drop out
 
 # Start game options
 
