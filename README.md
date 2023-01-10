@@ -126,7 +126,7 @@ Need a certain amount of time given to allow actions
 Players can cheat further
 Players can send each other hidden messages by purchasing the means from their shares
 flies of beelezebub - hidden simple instructions, tracable, non-binding
-letters from [Mephistopheles' pen](from https://en.wikipedia.org/wiki/Mephistopheles) - Faustian bargains which must be upheld and kept secret
+letters from [Mephistopheles' pen](https://en.wikipedia.org/wiki/Mephistopheles) - Faustian bargains which must be upheld and kept secret
 Players can watch other players for a chance to catch them
 There's a period where no one can watch the dealer 
 No one can see the people directly in front of them due to the fire
