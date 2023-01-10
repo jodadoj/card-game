@@ -34,7 +34,7 @@ Concept art designs are thus far a long, greasy haired boy with glowing red eyes
 
 # Enviroment
 
-Generally inspired by depiction of the [Fourth Cicle of Hell](https://en.wikipedia.org/wiki/Inferno_(Dante)#Fourth_Circle_(Greed))as a duelling ring
+Generally inspired by depiction of the [Fourth Cicle of Hell](https://en.wikipedia.org/wiki/Inferno_(Dante)#Fourth_Circle_(Greed)) as a duelling ring
 
 Dammed are watched by unseen entities in a dimly lit room as the surround a table with a flame under a chandelier
 
