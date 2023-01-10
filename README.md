@@ -10,6 +10,8 @@ Other trial names for the stages in play are puns involving ante and some olden 
 
 A game of [Mafia](https://en.wikipedia.org/wiki/Mafia_(party_game)) where every player is on both sides, driven through a game of poker. All players are assigning themselves roles and alligences as rounds progress and the game is both a task to not lose within poker (repeated passes/folds losing lives, going negative or having the worse hand) and to not incur suspicious or ire of other players while doing so.
 
+Generally designed as a possible board game and moved into the digital arena, the point is to inspire interesting relationships and social dynamics rather than technical skill.
+
 ## Premise:
 
 Background: A mystical games for money and souls in hell
