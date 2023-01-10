@@ -264,19 +264,21 @@ Only one can be voted off at a time
 
 Requires 2/3< players to vote for a person
 
-## Trial - Mammon is summoned to directly used hard evidence to convict a voted party of a certain crime
+## Trial - Mammon is summoned to directly use hard evidence to convict a voted party of a certain crime
 
 Evidence is unfalsifiable and guilt is proof of crime
 
 Important to note which evidence is binding and viewable by Mammon in this way as some "crimes" can't be proven
 
-Players have no input beyond the choice of what to look for
+Players have no input beyond the choice of what to look for and whether they believe someone is guilty or innocent before evidence is counted
 
-Lose half the pot
+Those who lose the bet lose half the pot
 
 People who incorrectly vote pay the cost and may go bust
 
 Only happens once per game
+
+Has the chance to wipe out all players
 
 Fewer people required to make it go
 
