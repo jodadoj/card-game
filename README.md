@@ -248,13 +248,13 @@ In this a player is accused of cheating
 
 There are three types of accusation planned:
 
-Opening - A player opens the floor to the accusation of another player
+## Opening - A player opens the floor to the accusation of another player
 
 Evidence can be falsified
 
 Not all is availible
 
-Counter - The player responds to an opening with evidence pointing to another player
+## Counter - The player responds to an opening with evidence pointing to another player
 
 Hard evidence is required
 
@@ -264,7 +264,7 @@ Only one can be voted off at a time
 
 Requires 2/3< players to vote for a person
 
-Trial - Mammon is summoned to directly used hard evidence to convict a voted party of a certain crime
+## Trial - Mammon is summoned to directly used hard evidence to convict a voted party of a certain crime
 
 Evidence is unfalsifiable and guilt is proof of crime
 
