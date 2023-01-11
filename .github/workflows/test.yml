@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  workflow_run:
+    workflows: [ Build cache ]
+    types:
+     - completed
+
+env:
+  node_version: "16.x"
+
+jobs:
+  build-cache:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+    - uses: actions/checkout@v3
+    - name: Format
+      run: yarn format
+    - name: Lint
+      run: yarn lint
+    - name: Test deck functions
+      uses: yarn vitest run deck

@@ -1,22 +1,22 @@
-name: CI
+name: Build cache
 
-on: [push]
+on:
+  [ push ]
 
 env:
   node_version: "16.x"
 
 jobs:
-  lint:
+  build-cache:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
     - name: Setup Node.js
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ env.node_version }}
-    - uses: c-hive/gha-yarn-cache@v1
+        cache: yarn
+    - uses: c-hive/gha-yarn-cache@v3
     - name: Install JS dependencies
-      run: yarn install
-    - name: Lint
-      run: yarn lint
+      run: yarn install --prefer-offline
