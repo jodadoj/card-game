@@ -20,4 +20,4 @@ jobs:
     - name: Lint
       run: yarn lint
     - name: Test deck functions
-      uses: yarn vitest run deck
+      run: yarn vitest run deck
