@@ -17,6 +17,5 @@ jobs:
       with:
         node-version: ${{ env.node_version }}
         cache: yarn
-    - uses: c-hive/gha-yarn-cache@v1
     - name: Install JS dependencies
       run: yarn install --prefer-offline
