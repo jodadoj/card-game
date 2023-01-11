@@ -1,8 +1,4 @@
-import {
-  createDeckArray,
-  createMarkedDeck,
-  shuffleDeck
-} from './deck';
+import { createDeckArray, createMarkedDeck, shuffleDeck } from './deck';
 import { it, describe, expect, expectTypeOf } from 'vitest';
 
 const differentSuits: string[] = ['♥', '♦', '♣', '♠'];
