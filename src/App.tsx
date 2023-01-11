@@ -1,27 +1,26 @@
 //const Card = require('./card.js');
-import { Card, createShuffledIdDeck, shuffleDeck } from "./deck";
-import { useState } from "react";
-import { HandView } from "./HandView";
-import { CardView } from "./CardView";
+import { Card, createShuffledIdDeck, shuffleDeck } from './deck';
+import { useState } from 'react';
+import { HandView } from './HandView';
+import { CardView } from './CardView';
 
-function App():JSX.Element {
-
+function App(): JSX.Element {
   // const [deck,setDeck] = useState<Card[]>(createDeckArray());
   // const [hand, setHand] = useState<Card[]>([]);
 
   //state:
   //deck:Card[]
-  //hand:Card[] 
+  //hand:Card[]
 
-  return(
+  return (
     <>
-
       hello app
       <p>Shuffled deck:</p>
-      <p>{createShuffledIdDeck().map((card, index)=>
-        <p key={index}>{ card.suit + JSON.stringify(card.value) }</p>
-      )}</p>
-
+      <p>
+        {createShuffledIdDeck().map((card, index) => (
+          <p key={index}>{card.suit + JSON.stringify(card.value)}</p>
+        ))}
+      </p>
       {/* <HandView /> */}
       {/* <CardView /> //to count cards remaining */}
       {/*/ ^ for now view all cards in the deck
@@ -38,8 +37,7 @@ function App():JSX.Element {
       // setHand(...prevHand, topCard)
       // setDeck(clonedDeck)
      //restart: 
-  //remove all cards within deck and hands, create new deck, shuffle (and deal starting hands or 0)*/} 
-
+  //remove all cards within deck and hands, create new deck, shuffle (and deal starting hands or 0)*/}
     </>
   );
 }

@@ -5,7 +5,7 @@ export interface Card {
   value: { [face: string]: number[] } | number[];
 }
 
-export interface idCard extends Card{
+export interface idCard extends Card {
   id: number;
 }
 
@@ -31,11 +31,11 @@ const differentValues: {
 
 //--------------------------------------------------------------------------------------Defining our deck
 
-export function createDeckArray():Card[] {
+export function createDeckArray(): Card[] {
   return differentSuits.flatMap((suit) => {
     return Object.values(differentValues).flatMap((key) => {
       return key.map((value) => {
-        return {suit, value};
+        return { suit, value };
       });
     });
   });
@@ -43,18 +43,18 @@ export function createDeckArray():Card[] {
 
 //-----------------------------------------------------------------want to id every card to allow marking, removing from deck, duplicating etc etc
 
-export function idFreshDeck(freshDeck:Card[]):idCard[]{
-  const idDeck:idCard[] = freshDeck.map((card, index):idCard => { 
-    return Object.assign({id: index}, card);
+export function idFreshDeck(freshDeck: Card[]): idCard[] {
+  const idDeck: idCard[] = freshDeck.map((card, index): idCard => {
+    return Object.assign({ id: index }, card);
   });
   return idDeck;
 }
 
-export function createMarkedDeck():idCard[]{
-  return idFreshDeck(createDeckArray())
+export function createMarkedDeck(): idCard[] {
+  return idFreshDeck(createDeckArray());
 }
 
-export function createShuffledIdDeck(){
+export function createShuffledIdDeck() {
   return shuffleDeck(createMarkedDeck());
 }
 
@@ -71,16 +71,20 @@ export function createShuffledIdDeck(){
 
 //---------------------------------------------------------------------------------------Shuffling
 
-  // think it's important to search for improved fisher yates algorithm later but:
+// think it's important to search for improved fisher yates algorithm later but:
 
-  //   -- To shuffle an array a of n elements (indices 0..n-1):
-  //      for i from n−1 downto 1 do
-  //      j ← random integer such that 0 ≤ j ≤ i
-  //      exchange a[j] and a[i]
+//   -- To shuffle an array a of n elements (indices 0..n-1):
+//      for i from n−1 downto 1 do
+//      j ← random integer such that 0 ≤ j ≤ i
+//      exchange a[j] and a[i]
 
-export function shuffleDeck(unshuffledDeck:idCard[]):idCard[] {
+export function shuffleDeck(unshuffledDeck: idCard[]): idCard[] {
   const shuffledDeck = unshuffledDeck;
-  for (let currentCard = shuffledDeck.length - 1; currentCard > 0; currentCard--) {
+  for (
+    let currentCard = shuffledDeck.length - 1;
+    currentCard > 0;
+    currentCard--
+  ) {
     //our current card is marked in deck
     const differentCard = Math.floor(Math.random() * currentCard + 1); //a different card is found somewhere and also marked
     const originalCard = shuffledDeck[differentCard]; //we make a note to put that card where we found our first
@@ -88,7 +92,11 @@ export function shuffleDeck(unshuffledDeck:idCard[]):idCard[] {
     shuffledDeck[currentCard] = originalCard; //then move the original into the space we're currently in
     //repeat until every card has been moved at least once
   }
-  for (let currentCard = 0; currentCard < shuffledDeck.length - 1; currentCard++) {
+  for (
+    let currentCard = 0;
+    currentCard < shuffledDeck.length - 1;
+    currentCard++
+  ) {
     //shuffle again in reverse
     const differentCard = Math.floor(Math.random() * currentCard + 1);
     const originalCard = shuffledDeck[differentCard];
@@ -101,8 +109,6 @@ export function shuffleDeck(unshuffledDeck:idCard[]):idCard[] {
 }
 
 // //--------------------------------------------------------------------------------------Old
-
-
 
 // export class Deck {
 //   public cards: Card[];
