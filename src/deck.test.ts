@@ -1,7 +1,6 @@
 import {
   createDeckArray,
   createMarkedDeck,
-  idFreshDeck,
   shuffleDeck
 } from './deck';
 import { it, describe, expect, expectTypeOf } from 'vitest';

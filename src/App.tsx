@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 //const Card = require('./card.js');
 import { Card, createShuffledIdDeck, shuffleDeck } from './deck';
 import { useState } from 'react';
@@ -43,3 +44,4 @@ function App(): JSX.Element {
 }
 
 export default App;
+/* eslint-enable @typescript-eslint/no-unused-vars */
