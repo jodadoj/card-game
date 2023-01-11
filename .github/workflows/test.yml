@@ -10,7 +10,7 @@ env:
   node_version: "16.x"
 
 jobs:
-  build-cache:
+  format-and-test:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
