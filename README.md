@@ -8,7 +8,7 @@ Other trial names for the stages in play are puns involving ante and some olden 
 
 ## Brief
 
-A game of [Mafia](https://en.wikipedia.org/wiki/Mafia_(party_game)) where every player is on both sides, driven through a game of poker. All players are assigning themselves roles and alligences as rounds progress and the game is both a task to not lose within poker (repeated passes/folds losing lives, going negative or having the worse hand) and to not incur suspicious or ire of other players while doing so.
+A game of [Mafia](<https://en.wikipedia.org/wiki/Mafia_(party_game)>) where every player is on both sides, driven through a game of poker. All players are assigning themselves roles and alligences as rounds progress and the game is both a task to not lose within poker (repeated passes/folds losing lives, going negative or having the worse hand) and to not incur suspicious or ire of other players while doing so.
 
 Generally designed as a possible board game and moved into the digital arena, the point is to inspire interesting relationships and social dynamics rather than technical skill.
 
@@ -24,45 +24,44 @@ Game master is [Mammon](https://en.wikipedia.org/wiki/Mammon) - one of the bibli
 
 > Lay not up for yourselves treasures upon earth, where moth and rust doth corrupt, and where thieves break through and steal: But lay up for yourselves treasures in heaven, where neither moth nor rust doth corrupt, and where thieves do not break through nor steal: For where your treasure is, there will your heart be also. No man can serve two masters: for either he will hate the one, and love the other; or else he will hold to the one, and despise the other. Ye cannot serve God and mammon. — Matthew 6:19–21, 24 (KJV)`
 
-Concept art designs are thus far a long, greasy haired boy with glowing red eyes, golden wings bound by heavy jewelery and tight rings that turn his skin blue and red. His model sits on a chandelier above the play area. 
+Concept art designs are thus far a long, greasy haired boy with glowing red eyes, golden wings bound by heavy jewelery and tight rings that turn his skin blue and red. His model sits on a chandelier above the play area.
 
-  Mammon is many interpretations regretful of his status as a fallen angel and is also replaced by [Plutus](https://en.wikipedia.org/wiki/Plutus) at points usually depicted as youthful if not an infant which inspires this description
-  
-  Current MVP design is simply a yellow version of the player model, can add lights around him for effect
-  
-  A full MVP would likely want to see a a better Mammon render as the "main character" of the "storyline"
+Mammon is many interpretations regretful of his status as a fallen angel and is also replaced by [Plutus](https://en.wikipedia.org/wiki/Plutus) at points usually depicted as youthful if not an infant which inspires this description
+
+Current MVP design is simply a yellow version of the player model, can add lights around him for effect
+
+A full MVP would likely want to see a a better Mammon render as the "main character" of the "storyline"
 
 # Enviroment
 
-Generally inspired by depiction of the [Fourth Cicle of Hell](https://en.wikipedia.org/wiki/Inferno_(Dante)#Fourth_Circle_(Greed)) as a duelling ring
+Generally inspired by depiction of the [Fourth Cicle of Hell](<https://en.wikipedia.org/wiki/Inferno_(Dante)#Fourth_Circle_(Greed)>) as a duelling ring
 
 Dammed are watched by unseen entities in a dimly lit room as the surround a table with a flame under a chandelier
 
 Light assets? Maybe actual eyes later but dim lights that move should be enough
-	
 The fire should represent the [Morning Star](https://en.wikipedia.org/wiki/Lucifer) as the symbol of Lucifer, King of Hell, and pride
-  
+
 Everything on the table comes from and dissapears into the fire
 
 A simple asset (perhaps another bright light) but pivotal to the game structure as a major piece
-  
-Also important are the mechanics of the play table 
 
-  The outer and inner sections of the table should eventually spin in opposite directions and differing speeds
-  
-  A large sound and visual aid for distinct game phases, not a priority but still should be implemented in MVP
- 
+Also important are the mechanics of the play table
+
+The outer and inner sections of the table should eventually spin in opposite directions and differing speeds
+
+A large sound and visual aid for distinct game phases, not a priority but still should be implemented in MVP
+
 Each player (refered to henceforth as the dammed) has different colours and possibly clothing (later build, easy to control material colour first via props)
 
-  When dammed lose they are burned by the flame in the center by Mammon pointing at them
-  
+When dammed lose they are burned by the flame in the center by Mammon pointing at them
+
 MVP doesn't need burning animation, sfx and light flash is enough
-    
+
 Symbolism is a of Pride becoming [Wrath](https://en.wikipedia.org/wiki/Satan) as they drop out
 
 # Start game options
 
-  CURRENTLY BUILDING
+CURRENTLY BUILDING
 
 All of these will be async options and built for MVP
 
@@ -80,7 +79,7 @@ Allow users to click options and scroll through a map of buttons
 
 Clickable button to start a function that sends arequest to begin a lobby
 
-Can be a database, also likely involves socket io 
+Can be a database, also likely involves socket io
 
 ## Find specfic room
 
@@ -90,7 +89,7 @@ Needs some sort of id
 
 When something matches (select room_id in availible_rooms)
 
-Primary key should a randomised password so every single room needs a password 
+Primary key should a randomised password so every single room needs a password
 
 # Game loop
 
@@ -140,43 +139,41 @@ They can leave at this point or stay for the final round (see below)
 
 Dammed sit around table
 
-		Set a position and id during this
+    	Set a position and id during this
 
-		Position needs to change each round
+    	Position needs to change each round
 
-		id is a primary key/identifier that's constant for the game
+    	id is a primary key/identifier that's constant for the game
 
 General card animations
 
-		Can be mostly unseen or controlled via react three fibra basic controls
+    	Can be mostly unseen or controlled via react three fibra basic controls
 
 Deck is created from fire in center
 
-		The fire is our original point in the canvas for simplicity, the camera is offset so all animations should start and finish there and be offset to neat angles towards the ends of the table 
-		
-		Cards themeselves may float and not be visible by other players or touched by other models. Animations should general not include models interacting in complex ways for MVP at all.
+    	The fire is our original point in the canvas for simplicity, the camera is offset so all animations should start and finish there and be offset to neat angles towards the ends of the table
 
-		When this happens we load 52 cards fresh and unaltered using createDeckArray() in deck.js
+    	Cards themeselves may float and not be visible by other players or touched by other models. Animations should general not include models interacting in complex ways for MVP at all.
 
-		Can link this to a database that then links to an array or something from JSON data so players across a network use the same cards
+    	When this happens we load 52 cards fresh and unaltered using createDeckArray() in deck.js
 
-		Needs to be alterable over network so 52 entiries that are mapped out to a function that creates models and sets which texture goes where. A Card.JSX component.
+    	Can link this to a database that then links to an array or something from JSON data so players across a network use the same cards
+
+    	Needs to be alterable over network so 52 entiries that are mapped out to a function that creates models and sets which texture goes where. A Card.JSX component.
 
 Table spins and Dealer is chosen
 
-		Set dealerId from random selection of players
+    	Set dealerId from random selection of players
 
-		dealerId changes evbery round
-
-
+    	dealerId changes evbery round
 
 Mammon "flight" and pointing
 
-		For loss and victory
+    	For loss and victory
 
 # DEALING - Ante-brachium - before conflict
 
-## Players options (under design) 
+## Players options (under design)
 
 Dealer is important as they technically cannot "cheat" in that round and are immune to accusations directly
 
@@ -198,7 +195,6 @@ this is visible to only the player who marks it originally
 
 can be observed by those with the cards
 
-
 insert new version of card (duplicate)
 
 basically makes it easier to accuse a dammed of cheating if they have a good hand
@@ -219,17 +215,17 @@ Dammed can cheat further
 
 Dammed can send each other hidden messages by purchasing the means from their shares
 
-		flies of beelezebub - hidden simple instructions, tracable, non-binding
-		
-			Can send in order to create suggestions but they don't hold up in trials
+    	flies of beelezebub - hidden simple instructions, tracable, non-binding
 
-		letters from [Mephistopheles' pen](https://en.wikipedia.org/wiki/Mephistopheles) - Faustian bargains which must be upheld and kept secret
-			
-			Dammed cannot accuse another they have signed a full contract with and must act in their favour until specified round
+    		Can send in order to create suggestions but they don't hold up in trials
+
+    	letters from [Mephistopheles' pen](https://en.wikipedia.org/wiki/Mephistopheles) - Faustian bargains which must be upheld and kept secret
+
+    		Dammed cannot accuse another they have signed a full contract with and must act in their favour until specified round
 
 Dammed can watch other dammed for a chance to catch them
 
-There's a period where no one can watch the dealer 
+There's a period where no one can watch the dealer
 
 No one can see the people directly in front of them due to the fire
 
@@ -245,9 +241,9 @@ As usual a majority vote
 
 In later builds dammed should be given random insecentives by kings and princes of hell to act in a certain way for more money (hidden from others) or cards or other tools
 
-		This of these as the extended roles in mafia
-		
-		Not necessarily a crime to fulfil these tasks and dammed should be able to reveal their contracts but they should create a target on their backs in some way through game theory
+    	This of these as the extended roles in mafia
+
+    	Not necessarily a crime to fulfil these tasks and dammed should be able to reveal their contracts but they should create a target on their backs in some way through game theory
 
 ## BETTING
 
@@ -259,7 +255,7 @@ Needs a trial run at this point to understand dynamics in actual play - basicall
 
 Current thoughts are no betting for the start of play, freely allowed betting for the rest and a deadlien to bet and not fold by default
 
-	The crime of sloth
+    The crime of sloth
 
 # REVEAL - antebellum - before war
 
@@ -275,7 +271,7 @@ In this a dammed is accused of cheating
 
 There are three types of accusation planned:
 
-## Opening - A dammed opens the floor to the accusation of another 
+## Opening - A dammed opens the floor to the accusation of another
 
 Evidence can be falsified
 
@@ -319,7 +315,7 @@ The final round should be a game between two dammed
 
 This is not to be implemented within this MVP but is planned along with a spectator function for those who lose in earlier round
 
-Essentially would want to have gaseous masses or lights floating and viewing the games 
+Essentially would want to have gaseous masses or lights floating and viewing the games
 
 Both to learn from better players and also perhaps bet further amongst themselves on a winner
 
