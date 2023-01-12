@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+export function blackjack(): void {}
+
+/* eslint-enable @typescript-eslint/no-empty-function */
+
 // class App extends React.Component {
 //     constructor(props) {
 //       super(props);
