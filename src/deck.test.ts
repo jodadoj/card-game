@@ -1,4 +1,4 @@
-import { createDeckArray, createMarkedDeck, shuffleDeck } from './deck';
+import { Card, createDeckArray, createMarkedDeck, idCard, shuffleDeck } from './deck';
 import { it, describe, expect, expectTypeOf } from 'vitest';
 
 const differentSuits: string[] = ['♥', '♦', '♣', '♠'];
@@ -23,8 +23,10 @@ describe('What object is created by createDeck?', () => {
   });
 
   it('checks the cards produced by createDeckObject are put into an array/object', () => {
-    console.table(createDeckArray());
-    expect(createDeckArray.length).toBe(52);
+    const createdDeck:Card[] = createDeckArray()
+    console.table(createdDeck);
+    const createdDeckSize:number = createdDeck.length;
+    expect(createdDeckSize).toBe(52);
     expectTypeOf(createDeckArray()).toEqualTypeOf<object>;
   });
 
@@ -34,8 +36,11 @@ describe('What object is created by createDeck?', () => {
   });
 
   it('shuffles the deck', () => {
-    console.table(shuffleDeck(createMarkedDeck()));
-    expect(shuffleDeck(createMarkedDeck()).length).toBe(52);
-    expectTypeOf(shuffleDeck(createMarkedDeck())).toEqualTypeOf<object>;
+    const shuffledDeck:idCard[] = shuffleDeck(createMarkedDeck())
+    console.table(shuffledDeck);
+    const shuffledDeckSize = shuffledDeck.length;
+    console.table("the shuffled deck contains "+shuffledDeckSize+" cards");
+    expect(shuffledDeckSize).toBe(52);
+    expectTypeOf(shuffledDeck).toEqualTypeOf<object>;
   });
 });
