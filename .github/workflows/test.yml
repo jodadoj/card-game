@@ -26,8 +26,11 @@ jobs:
           ${{ runner.os }}-yarn-
     - run: yarn install
     - name: Format
+      if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: yarn format
     - name: Lint
+      if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: yarn lint
     - name: Test deck functions
+      if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: yarn vitest run deck
