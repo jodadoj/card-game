@@ -1,27 +1,26 @@
 name: Build cache
 
-on:
-  [ push ]
+on: [push]
 
 env:
-  node_version: "16.x"
+  node_version: '16.x'
 
 jobs:
   build-cache:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ env.node_version }}
-        cache: yarn
-    - name: Install JS dependencies
-      run: yarn install --prefer-offline --frozen-lockfile
-    - name: Format
-      run: yarn format
-    - name: Lint
-      run: yarn lint
-    - name: Test deck functions
-      run: yarn vitest run deck
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.node_version }}
+          cache: yarn
+      - name: Install JS dependencies
+        run: yarn install --prefer-offline --frozen-lockfile
+      - name: Format
+        run: yarn format
+      - name: Lint
+        run: yarn lint
+      - name: Test deck functions
+        run: yarn vitest run deck
