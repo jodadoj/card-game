@@ -2,8 +2,8 @@ import React, { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { RigidBody } from '@react-three/rapier';
 
-export function Card(props) {
-  const { nodes, materials } = useGLTF('./model/card.gltf');
+export function CardModel(props) {
+  const { nodes, materials } = useGLTF(`./model/${Array.isArray(props.card.value) ? props.card.value[0] : Object.keys(props.value.face)[0]} ${props.card.suit}+'.gltf`);
   return (
     <RigidBody
       colliders="hull"
@@ -14,7 +14,8 @@ export function Card(props) {
           castShadow
           receiveShadow
           geometry={nodes.Plane.geometry}
-          material={materials['Material.001']}
+          material={materials.Material}
+          rotation={[-Math.PI, 0, -Math.PI / 2]}
         />
       </group>
     </RigidBody>

@@ -1,0 +1,25 @@
+.canvas-container {
+    width: 100%;
+    height: 50%;
+    z-index: -1;
+  }
+
+  #canvas {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #fbc926;
+  }
+
+  #root {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+  }
+  .text-container {
+    width: 50vw;
+    height: 50vh;
+    z-index: 1;
+  }
