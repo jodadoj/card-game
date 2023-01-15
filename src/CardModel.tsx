@@ -27,6 +27,7 @@ export default function CardModel({ card, ...props }: CardModelProps) {
     getCardName(card)
   ) as unknown as GLTFResult;
   useGLTF.preload(getCardName(card));
+
   return (
     <group {...props} dispose={null}>
       <mesh
