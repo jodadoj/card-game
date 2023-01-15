@@ -14,3 +14,29 @@ body,
   padding: 0;
   overflow: hidden;
 }
+
+.ctn-fullscreen {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: grid;
+  grid-template-areas:
+    'logo logo logo'
+    'logo  logo logo'
+    'opt  opt opt';
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+}
+
+.root {
+  background-color: red;
+}
+.ctn-logo {
+  grid-area: logo;
+}
+.ctn-options {
+  grid-area: opt;
+  background-color: black;
+}

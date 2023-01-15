@@ -42,25 +42,44 @@ function App(): JSX.Element {
   // }
 
   return (
-    <div className="canvas-container">
-      <Canvas camera={{ position: [0, -50, 0], fov: 90 }}>
-        <OrbitControls />
-        <ambientLight intensity={1} />
-        <mesh position={[15, 0, 0]}>
-          <boxGeometry args={[10, 10, 10]} />
-        </mesh>
-        <mesh position={[-15, 0, 0]}>
-          <boxGeometry args={[10, 10, 10]} />
-        </mesh>
-        <mesh rotation={[Math.PI / 2, 0, 0]} scale={[10, 10, 10]}>
-          <King />
-        </mesh>
-        {/* {createShuffledIdDeck().map((card) => {
-            return <CardModel key={card.id}> card={card}
-              onClick={() => console.log(card.suit + " " + card.value)}/>
-                })}
-              <OrbitControls /> */}
-      </Canvas>
+    <div className="ctn-fullscreen">
+      <div className="ctn-logo">
+        <div className="canvas-container">
+          <Canvas camera={{ position: [0, -50, 0], fov: 90 }}>
+            <OrbitControls />
+            <ambientLight intensity={1} />
+            <mesh position={[15, 0, 0]}>
+              <boxGeometry args={[10, 10, 10]} />
+            </mesh>
+            <mesh position={[-15, 0, 0]}>
+              <boxGeometry args={[10, 10, 10]} />
+            </mesh>
+            <mesh rotation={[Math.PI / 2, 0, 0]} scale={[10, 10, 10]}>
+              <CardModel />
+            </mesh>
+            {/* {createShuffledIdDeck().map((card) => {
+              return <CardModel key={card.id}> card={card}
+                onClick={() => console.log(card.suit + " " + card.value)}/>
+                  })}
+                <OrbitControls /> */}
+          </Canvas>
+        </div>
+      </div>
+      <div className="ctn-options">
+        <Canvas camera={{ position: [0, -50, 0], fov: 90 }}>
+          <OrbitControls />
+          <ambientLight intensity={1} />
+          <mesh position={[15, 0, 0]}>
+            <boxGeometry args={[10, 10, 10]} />
+          </mesh>
+          <mesh position={[-15, 0, 0]}>
+            <boxGeometry args={[10, 10, 10]} />
+          </mesh>
+          <mesh rotation={[Math.PI / 2, 0, 0]} scale={[10, 10, 10]}>
+            <King />
+          </mesh>
+        </Canvas>
+      </div>
     </div>
   );
 }

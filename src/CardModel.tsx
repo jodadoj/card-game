@@ -1,20 +1,21 @@
 import * as THREE from 'three';
-// import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
-// import getCardName from './getCardName';
-// import { idCard } from './deck';
+import getCardName from './getCardName';
+import { idCard } from './deck';
 
 type GLTFResult = GLTF & {
   nodes: {
     Plane: THREE.Mesh;
-    // node_id4: THREE.Mesh;
   };
   materials: {
     Material: THREE.MeshStandardMaterial;
-    // ['34']: THREE.MeshStandardMaterial;
   };
 };
+
+// ['34']: THREE.MeshStandardMaterial;
+// node_id4: THREE.Mesh;
 
 // type CardModelProps = {
 //   props: NonNullable<JSX.IntrinsicElements['group']>;
@@ -33,7 +34,9 @@ export default function CardModel(props: JSX.IntrinsicElements['group']) {
   // const { nodes, materials } = useGLTF(
   //   getCardName(card)
   // ) as unknown as GLTFResult;
-  const { nodes, materials } = useGLTF('/10 ♠.glb') as unknown as GLTFResult;
+  const { nodes, materials } = useGLTF(
+    '/model/4 ♠.glb'
+  ) as unknown as GLTFResult;
 
   return (
     <group {...props} dispose={null}>
@@ -67,4 +70,6 @@ export default function CardModel(props: JSX.IntrinsicElements['group']) {
 //   );
 // }
 
-useGLTF.preload('/10 ♠.glb');
+//useGLTF.preload('/model/10 ♠.glb');
+
+//useGLTF.preload('/model/10 ♠.glb');

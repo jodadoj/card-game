@@ -2,6 +2,7 @@ import {
   Card,
   createDeckArray,
   createMarkedDeck,
+  createShuffledIdDeck,
   idCard,
   shuffleDeck
 } from './deck';
@@ -48,5 +49,6 @@ describe('What object is created by createDeck?', () => {
     console.table('the shuffled deck contains ' + shuffledDeckSize + ' cards');
     expect(shuffledDeckSize).toBe(52);
     expectTypeOf(shuffledDeck).toEqualTypeOf<object>;
+    console.log('first card was ', createShuffledIdDeck().pop());
   });
 });
