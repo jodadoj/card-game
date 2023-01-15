@@ -10,7 +10,8 @@
     "format": "prettier --write .",
     "lint": "eslint .",
     "test": "vitest",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "pre-commit-lint": "lint-staged"
   },
   "dependencies": {
     "@react-three/drei": "^9.51.20",

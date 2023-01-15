@@ -13,7 +13,10 @@ import { Plane } from '@react-three/drei';
 import { RigidBody } from '@react-three/rapier';
 import { Physics } from '@react-three/rapier';
 import { Float } from '@react-three/drei';
-import { CardModel } from './card.jsx';
+import * as THREE from 'three';
+import { useLoader } from '@react-three/fiber';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import CardModel from './CardModel.js';
 
 function App(): JSX.Element {
   // const [deck,setDeck] = useState<Card[]>(createDeckArray());
@@ -42,7 +45,7 @@ function App(): JSX.Element {
       <Canvas>
         <OrbitControls />
         <mesh>
-          <boxGeometry />
+          <CardModel position={[0, 0, 0]} />
         </mesh>
         {/* {createShuffledIdDeck().map((card) => {
             return <CardModel key={card.id}> card={card}
@@ -56,3 +59,8 @@ function App(): JSX.Element {
 }
 
 export default App;
+
+// {createShuffledIdDeck().map((card) => {
+//   return <CardModel key={card.id}> card={card}
+//     onClick={() => console.log(card.suit + " " + card.value)}/>
+//       })}

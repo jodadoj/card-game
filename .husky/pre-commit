@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-yarn prettier --write src &&
- yarn eslint src
+yarn pre-commit-lint
