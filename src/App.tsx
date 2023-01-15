@@ -16,7 +16,8 @@ import { Float } from '@react-three/drei';
 import * as THREE from 'three';
 import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import CardModel from './CardModel.js';
+import CardModel from './CardModel';
+import { King } from './King';
 
 function App(): JSX.Element {
   // const [deck,setDeck] = useState<Card[]>(createDeckArray());
@@ -42,17 +43,23 @@ function App(): JSX.Element {
 
   return (
     <div className="canvas-container">
-      <Canvas>
+      <Canvas camera={{ position: [0, -50, 0], fov: 90 }}>
         <OrbitControls />
-        <mesh>
-          <CardModel position={[0, 0, 0]} />
+        <ambientLight intensity={1} />
+        <mesh position={[15, 0, 0]}>
+          <boxGeometry args={[10, 10, 10]} />
+        </mesh>
+        <mesh position={[-15, 0, 0]}>
+          <boxGeometry args={[10, 10, 10]} />
+        </mesh>
+        <mesh rotation={[Math.PI / 2, 0, 0]} scale={[10, 10, 10]}>
+          <King />
         </mesh>
         {/* {createShuffledIdDeck().map((card) => {
             return <CardModel key={card.id}> card={card}
               onClick={() => console.log(card.suit + " " + card.value)}/>
                 })}
-              <OrbitControls />
-              <ambientLight intensity={1} /> */}
+              <OrbitControls /> */}
       </Canvas>
     </div>
   );

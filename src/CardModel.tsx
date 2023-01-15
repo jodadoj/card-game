@@ -1,32 +1,39 @@
 import * as THREE from 'three';
-import React, { useRef } from 'react';
+// import { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
-import getCardName from './getCardName';
-import { idCard } from './deck';
+// import getCardName from './getCardName';
+// import { idCard } from './deck';
 
 type GLTFResult = GLTF & {
   nodes: {
     Plane: THREE.Mesh;
-    node_id4: THREE.Mesh;
+    // node_id4: THREE.Mesh;
   };
   materials: {
     Material: THREE.MeshStandardMaterial;
+    // ['34']: THREE.MeshStandardMaterial;
   };
 };
 
-interface CardModelProps extends JSX.IntrinsicElements {
-  card: idCard;
-  groupProps: JSX.IntrinsicElements['group'];
-}
+// type CardModelProps = {
+//   props: NonNullable<JSX.IntrinsicElements['group']>;
+// }
 
 // function Plane({ color, ...props }: OurPlaneProps)
 
-export default function CardModel({ card, ...props }: CardModelProps) {
-  const { nodes, materials } = useGLTF(
-    getCardName(card)
-  ) as unknown as GLTFResult;
-  useGLTF.preload(getCardName(card));
+// type OurPlaneProps = Pick<MeshPhongMaterialProps, 'color'> & Pick<PlaneProps, 'position' | 'rotation'>
+
+// function Plane({ color, ...props }: OurPlaneProps) {
+
+// let setCard:idCard;
+
+export default function CardModel(props: JSX.IntrinsicElements['group']) {
+  // setCard = card;
+  // const { nodes, materials } = useGLTF(
+  //   getCardName(card)
+  // ) as unknown as GLTFResult;
+  const { nodes, materials } = useGLTF('/10 ♠.glb') as unknown as GLTFResult;
 
   return (
     <group {...props} dispose={null}>
@@ -40,6 +47,8 @@ export default function CardModel({ card, ...props }: CardModelProps) {
     </group>
   );
 }
+
+// useGLTF.preload(getCardName(setCard));
 
 // export function Model(props: JSX.IntrinsicElements["group"]) {
 //   const { nodes, materials } = useGLTF("/10 ♠.glb") as GLTFResult;
@@ -58,4 +67,4 @@ export default function CardModel({ card, ...props }: CardModelProps) {
 //   );
 // }
 
-// useGLTF.preload("/10 ♠.glb");
+useGLTF.preload('/10 ♠.glb');
