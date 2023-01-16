@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 //const Card = require('./card.js');
-import { Card, createShuffledIdDeck, shuffleDeck } from './deck';
+import { Card, createShuffledIdDeck, idCard, shuffleDeck } from './deck';
 import React, { useState } from 'react';
 import { HandView } from './HandView';
 import { CardView } from './CardView';
@@ -42,6 +42,15 @@ function App(): JSX.Element {
   //   });
   // }
 
+  let playerCard: idCard = { id: 0, suit: '', value: [] };
+  let dealerCard: idCard = { id: 0, suit: '', value: [] };
+  const deck = createShuffledIdDeck();
+  if (deck.length > 1) {
+    playerCard = deck.pop() as idCard;
+  }
+  if (deck.length > 1) {
+    dealerCard = deck.pop() as idCard;
+  }
   return (
     <div className="ctn-fullscreen-start">
       <div className="ctn-player-hand">
@@ -55,9 +64,13 @@ function App(): JSX.Element {
             <mesh position={[-15, 0, 0]}>
               <boxGeometry args={[10, 10, 10]} />
             </mesh>
-            <mesh rotation={[Math.PI / 2, 0, 0]} scale={[10, 10, 10]}>
-              <CardModel />
-            </mesh>
+            <group scale={[10, 10, 10]}>
+              {playerCard.suit !== '' ? (
+                <CardModel card={playerCard} />
+              ) : (
+                <boxGeometry args={[50, 10, 10]} />
+              )}
+            </group>
             {/* {createShuffledIdDeck().map((card) => {
               return <CardModel key={card.id}> card={card}
                 onClick={() => console.log(card.suit + " " + card.value)}/>
@@ -77,9 +90,13 @@ function App(): JSX.Element {
             <mesh position={[-15, 0, 0]}>
               <boxGeometry args={[10, 10, 10]} />
             </mesh>
-            <mesh rotation={[Math.PI / 2, 0, 0]} scale={[10, 10, 10]}>
-              <CardModel />
-            </mesh>
+            <group scale={[10, 10, 10]}>
+              {dealerCard.suit !== '' ? (
+                <CardModel card={dealerCard} />
+              ) : (
+                <boxGeometry args={[50, 10, 10]} />
+              )}
+            </group>
             {/* {createShuffledIdDeck().map((card) => {
               return <CardModel key={card.id}> card={card}
                 onClick={() => console.log(card.suit + " " + card.value)}/>

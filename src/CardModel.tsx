@@ -17,6 +17,10 @@ type GLTFResult = GLTF & {
 // ['34']: THREE.MeshStandardMaterial;
 // node_id4: THREE.Mesh;
 
+interface CardModelProps {
+  card: idCard;
+}
+
 // type CardModelProps = {
 //   props: NonNullable<JSX.IntrinsicElements['group']>;
 // }
@@ -29,23 +33,29 @@ type GLTFResult = GLTF & {
 
 // let setCard:idCard;
 
-export default function CardModel(props: JSX.IntrinsicElements['group']) {
-  // setCard = card;
-  // const { nodes, materials } = useGLTF(
-  //   getCardName(card)
-  // ) as unknown as GLTFResult;
+export default function CardModel(props: CardModelProps): JSX.Element {
+  const card = props.card;
+  console.log('card is ', card);
+  const setCard: idCard = card;
+  console.log('setCard is ', setCard);
+  // console.log(getCardName(setCard));
+  console.log(Array.isArray(card.value));
+  // console.log();
   const { nodes, materials } = useGLTF(
-    '/model/4 ♠.glb'
+    getCardName(card)
   ) as unknown as GLTFResult;
+  // const { nodes, materials } = useGLTF(
+  //   '/model/4 ♠.glb'
+  // ) as unknown as GLTFResult;
 
   return (
-    <group {...props} dispose={null}>
+    <group>
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.Plane.geometry}
         material={materials.Material}
-        rotation={[-Math.PI, 0, -Math.PI / 2]}
+        rotation={[-Math.PI / 2, 0, -Math.PI / 2]}
       />
     </group>
   );
