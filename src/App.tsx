@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 //const Card = require('./card.js');
 import { Card, createShuffledIdDeck, shuffleDeck } from './deck';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { HandView } from './HandView';
 import { CardView } from './CardView';
 import { Canvas, Euler } from '@react-three/fiber';
@@ -18,6 +18,7 @@ import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import CardModel from './CardModel';
 import { King } from './King';
+import { Fog } from 'three';
 
 function App(): JSX.Element {
   // const [deck,setDeck] = useState<Card[]>(createDeckArray());
@@ -42,8 +43,30 @@ function App(): JSX.Element {
   // }
 
   return (
-    <div className="ctn-fullscreen">
-      <div className="ctn-logo">
+    <div className="ctn-fullscreen-start">
+      <div className="ctn-player-hand">
+        <div className="canvas-container">
+          <Canvas camera={{ position: [0, -50, 0], fov: 90 }}>
+            <OrbitControls />
+            <ambientLight intensity={1} />
+            <mesh position={[15, 0, 0]}>
+              <boxGeometry args={[10, 10, 10]} />
+            </mesh>
+            <mesh position={[-15, 0, 0]}>
+              <boxGeometry args={[10, 10, 10]} />
+            </mesh>
+            <mesh rotation={[Math.PI / 2, 0, 0]} scale={[10, 10, 10]}>
+              <CardModel />
+            </mesh>
+            {/* {createShuffledIdDeck().map((card) => {
+              return <CardModel key={card.id}> card={card}
+                onClick={() => console.log(card.suit + " " + card.value)}/>
+                  })}
+                <OrbitControls /> */}
+          </Canvas>
+        </div>
+      </div>
+      <div className="ctn-dealer-hand">
         <div className="canvas-container">
           <Canvas camera={{ position: [0, -50, 0], fov: 90 }}>
             <OrbitControls />
@@ -66,17 +89,32 @@ function App(): JSX.Element {
         </div>
       </div>
       <div className="ctn-options">
-        <Canvas camera={{ position: [0, -50, 0], fov: 90 }}>
-          <OrbitControls />
+        <Canvas camera={{ position: [0, -50, 0] }}>
+          <fogExp2 attach="fog" color="white" density={0.001} />
           <ambientLight intensity={1} />
-          <mesh position={[15, 0, 0]}>
-            <boxGeometry args={[10, 10, 10]} />
+          <mesh position={[150, 0, 0]}>
+            <boxGeometry args={[50, 10, 10]} />
           </mesh>
-          <mesh position={[-15, 0, 0]}>
-            <boxGeometry args={[10, 10, 10]} />
+          <mesh position={[0, 0, 0]}>
+            <boxGeometry args={[50, 10, 10]} />
           </mesh>
-          <mesh rotation={[Math.PI / 2, 0, 0]} scale={[10, 10, 10]}>
-            <King />
+          <mesh position={[-150, 0, 0]}>
+            <boxGeometry args={[50, 10, 10]} />
+          </mesh>
+        </Canvas>
+      </div>
+      <div className="ctn-score">
+        <Canvas camera={{ position: [0, -50, 0] }}>
+          <fogExp2 attach="fog" color="white" density={0.001} />
+          <ambientLight intensity={1} />
+          <mesh position={[150, 0, 0]}>
+            <boxGeometry args={[50, 10, 10]} />
+          </mesh>
+          <mesh position={[0, 0, 0]}>
+            <boxGeometry args={[50, 10, 10]} />
+          </mesh>
+          <mesh position={[-150, 0, 0]}>
+            <boxGeometry args={[50, 10, 10]} />
           </mesh>
         </Canvas>
       </div>
