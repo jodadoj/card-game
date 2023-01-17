@@ -1,6 +1,6 @@
-import { Card, idCard } from './deck';
+import { IdCard } from './deck';
 
-export default function getCardName(card: idCard | undefined | null) {
+export default function getCardName(card: IdCard | undefined | null) {
   if (!card) {
     return '';
   }

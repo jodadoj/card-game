@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import getCardName from './getCardName';
-import { idCard } from './deck';
+import { IdCard } from './deck';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -18,7 +18,8 @@ type GLTFResult = GLTF & {
 // node_id4: THREE.Mesh;
 
 interface CardModelProps {
-  card: idCard;
+  card: IdCard;
+  position: [x: number, y: number, z: number];
 }
 
 // type CardModelProps = {
@@ -34,22 +35,14 @@ interface CardModelProps {
 // let setCard:idCard;
 
 export default function CardModel(props: CardModelProps): JSX.Element {
-  const card = props.card;
-  console.log('card is ', card);
-  const setCard: idCard = card;
-  console.log('setCard is ', setCard);
-  // console.log(getCardName(setCard));
-  console.log(Array.isArray(card.value));
-  // console.log();
+  const card: IdCard = props.card;
+  // console.log('card is ', card);
   const { nodes, materials } = useGLTF(
     getCardName(card)
   ) as unknown as GLTFResult;
-  // const { nodes, materials } = useGLTF(
-  //   '/model/4 ♠.glb'
-  // ) as unknown as GLTFResult;
 
   return (
-    <group>
+    <group position={props.position}>
       <mesh
         castShadow
         receiveShadow
@@ -60,26 +53,5 @@ export default function CardModel(props: CardModelProps): JSX.Element {
     </group>
   );
 }
-
-// useGLTF.preload(getCardName(setCard));
-
-// export function Model(props: JSX.IntrinsicElements["group"]) {
-//   const { nodes, materials } = useGLTF("/10 ♠.glb") as GLTFResult;
-//   return (
-//     <group {...props} dispose={null}>
-//       <mesh
-//         castShadow
-//         receiveShadow
-//         geometry={nodes.node_id4.geometry}
-//         material={materials["34"]}
-//         position={[0, 0, 0.26]}
-//         rotation={[-Math.PI, 0, -Math.PI / 2]}
-//         scale={0.14}
-//       />
-//     </group>
-//   );
-// }
-
-//useGLTF.preload('/model/10 ♠.glb');
 
 //useGLTF.preload('/model/10 ♠.glb');

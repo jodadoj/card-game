@@ -25,9 +25,10 @@ body,
   grid-template-areas:
     'dealer player'
     'dealer  player'
+    'deck deck'
     'score  opt';
-  grid-template-rows: 1/3fr 1/3fr 1/3fr;
-  grid-template-columns: 1/2fr 1/2fr;
+  grid-template-rows: 1fr 1fr 1/2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 1rem;
   background-color: aliceblue;
 }
@@ -41,11 +42,15 @@ body,
 }
 .ctn-dealer-hand {
   grid-area: dealer;
-  background-color: grey;
+  background-color: blue;
+}
+.ctn-totals {
+  grid-area: deck;
+  background-color: yellow;
 }
 .ctn-score {
   grid-area: score;
-  background-color: black;
+  background-color: purple;
 }
 .ctn-options {
   grid-area: opt;

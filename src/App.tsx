@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 //const Card = require('./card.js');
-import { Card, createShuffledIdDeck, idCard, shuffleDeck } from './deck';
+import {
+  Card,
+  createShuffledIdDeck,
+  IdCard as IdCard,
+  shuffleDeck
+} from './deck';
 import React, { useState } from 'react';
 import { HandView } from './HandView';
 import { CardView } from './CardView';
@@ -42,15 +47,52 @@ function App(): JSX.Element {
   //   });
   // }
 
-  let playerCard: idCard = { id: 0, suit: '', value: [] };
-  let dealerCard: idCard = { id: 0, suit: '', value: [] };
-  const deck = createShuffledIdDeck();
-  if (deck.length > 1) {
-    playerCard = deck.pop() as idCard;
+  const [playerHand, setPlayerHand] = useState<IdCard[]>([]);
+  const [dealerHand, setDealerHand] = useState<IdCard[]>([]);
+
+  const [deck, setDeck] = useState<IdCard[]>(createShuffledIdDeck());
+  // const playerCard: IdCard = { id: 0, suit: '', value: [] };
+  // const dealerCard: IdCard = { id: 0, suit: '', value: [] };
+
+  function dealCard(currentDeck: IdCard[]): IdCard {
+    const newDeck: IdCard[] = [...currentDeck];
+    let dealtCard: IdCard = { id: 0, suit: '', value: [] };
+    try {
+      if (newDeck.length > 1) {
+        dealtCard = newDeck.pop() as IdCard;
+      }
+      if (newDeck.length <= 0) {
+        console.error('Deck empty');
+      }
+    } catch (error) {
+      console.error('Use restart function or reload for new deck');
+    }
+    return dealtCard;
   }
-  if (deck.length > 1) {
-    dealerCard = deck.pop() as idCard;
+
+  function handleCardClick(currentDeck: IdCard[]): IdCard {
+    const newDeck: IdCard[] = [...currentDeck];
+    let dealtCard: IdCard = { id: 0, suit: '', value: [] };
+    try {
+      dealtCard = dealCard(newDeck);
+      console.log(dealtCard);
+      newDeck.pop();
+    } catch (error) {
+      console.error('Card could not be loaded');
+    } finally {
+      setDeck([...newDeck]);
+      console.log('Deck is', deck);
+    }
+    return dealtCard;
   }
+
+  // function dealPlayer(currentDeck: IdCard[]):IdCard {
+  //   const newDeck: IdCard[] = [...currentDeck];
+  //   let dealtCard: IdCard = { id: 0, suit: '', value: [] };
+  //   setDeck([...newDeck])
+  //   return dealtCard = newDeck.pop() as IdCard;
+  // }
+
   return (
     <div className="ctn-fullscreen-start">
       <div className="ctn-player-hand">
@@ -58,24 +100,22 @@ function App(): JSX.Element {
           <Canvas camera={{ position: [0, -50, 0], fov: 90 }}>
             <OrbitControls />
             <ambientLight intensity={1} />
-            <mesh position={[15, 0, 0]}>
-              <boxGeometry args={[10, 10, 10]} />
-            </mesh>
-            <mesh position={[-15, 0, 0]}>
-              <boxGeometry args={[10, 10, 10]} />
-            </mesh>
             <group scale={[10, 10, 10]}>
-              {playerCard.suit !== '' ? (
-                <CardModel card={playerCard} />
-              ) : (
-                <boxGeometry args={[50, 10, 10]} />
-              )}
+              {playerHand.map((card, i) => {
+                return (
+                  <CardModel
+                    card={card}
+                    key={card.id}
+                    position={[
+                      i * 2 - playerHand.length / 2,
+                      0,
+                      Math.random() * 0.25 - 0.125
+                    ]}
+                  />
+                );
+              })}
+              ;
             </group>
-            {/* {createShuffledIdDeck().map((card) => {
-              return <CardModel key={card.id}> card={card}
-                onClick={() => console.log(card.suit + " " + card.value)}/>
-                  })}
-                <OrbitControls /> */}
           </Canvas>
         </div>
       </div>
@@ -84,38 +124,77 @@ function App(): JSX.Element {
           <Canvas camera={{ position: [0, -50, 0], fov: 90 }}>
             <OrbitControls />
             <ambientLight intensity={1} />
-            <mesh position={[15, 0, 0]}>
-              <boxGeometry args={[10, 10, 10]} />
-            </mesh>
-            <mesh position={[-15, 0, 0]}>
-              <boxGeometry args={[10, 10, 10]} />
-            </mesh>
             <group scale={[10, 10, 10]}>
-              {dealerCard.suit !== '' ? (
-                <CardModel card={dealerCard} />
-              ) : (
-                <boxGeometry args={[50, 10, 10]} />
-              )}
+              {dealerHand.map((card, i) => {
+                return (
+                  <CardModel
+                    card={card}
+                    key={card.id}
+                    position={[
+                      i * 2 - dealerHand.length / 2,
+                      0,
+                      Math.random() * 0.25 - 0.125
+                    ]}
+                  />
+                );
+              })}
+              ;
             </group>
-            {/* {createShuffledIdDeck().map((card) => {
-              return <CardModel key={card.id}> card={card}
-                onClick={() => console.log(card.suit + " " + card.value)}/>
-                  })}
-                <OrbitControls /> */}
           </Canvas>
+        </div>
+      </div>
+      {/* <div className="ctn-deck-view">
+        <div className="canvas-container">
+          <Canvas camera={{ position: [0, -50, 0], fov: 90 }}>
+            <OrbitControls />
+            <ambientLight intensity={1} />
+            <group scale={[10, 10, 10]}>
+              {deck.map((card, i) => {
+                return (<CardModel card={card} key={card.id} position={[i * 2 - deck.length / 2, 0, Math.random() * 0.25 - 0.125]} />)
+              })};
+            </group>
+          </Canvas>
+        </div>
+      </div> */}
+      <div className="ctn-totals">
+        <div className="canvas-container">
+          <p>{JSON.stringify(playerHand)}</p>
+          <p>{JSON.stringify(dealerHand)}</p>
+          <p>
+            Player score:{' '}
+            {playerHand[0] &&
+              playerHand
+                .map((card) => {
+                  return Array.isArray(card.value) ? card.value[0] : 10;
+                })
+                .reduce((total, current) => {
+                  return total + current;
+                })}
+          </p>
+          <p>
+            Dealer score:{' '}
+            {dealerHand[0] &&
+              dealerHand
+                .map((card) => {
+                  return Array.isArray(card.value) ? card.value[0] : 10;
+                })
+                .reduce((total, current) => {
+                  return total + current;
+                })}
+          </p>
         </div>
       </div>
       <div className="ctn-options">
         <Canvas camera={{ position: [0, -50, 0] }}>
           <fogExp2 attach="fog" color="white" density={0.001} />
           <ambientLight intensity={1} />
-          <mesh position={[150, 0, 0]}>
-            <boxGeometry args={[50, 10, 10]} />
-          </mesh>
-          <mesh position={[0, 0, 0]}>
-            <boxGeometry args={[50, 10, 10]} />
-          </mesh>
-          <mesh position={[-150, 0, 0]}>
+          <mesh
+            position={[0, 0, 0]}
+            onClick={(e) => {
+              setPlayerHand([...playerHand, handleCardClick(deck)]),
+                console.log('Player hand is ', playerHand);
+            }}
+          >
             <boxGeometry args={[50, 10, 10]} />
           </mesh>
         </Canvas>
@@ -124,13 +203,13 @@ function App(): JSX.Element {
         <Canvas camera={{ position: [0, -50, 0] }}>
           <fogExp2 attach="fog" color="white" density={0.001} />
           <ambientLight intensity={1} />
-          <mesh position={[150, 0, 0]}>
-            <boxGeometry args={[50, 10, 10]} />
-          </mesh>
-          <mesh position={[0, 0, 0]}>
-            <boxGeometry args={[50, 10, 10]} />
-          </mesh>
-          <mesh position={[-150, 0, 0]}>
+          <mesh
+            position={[0, 0, 0]}
+            onClick={(e) => {
+              setDealerHand([...dealerHand, handleCardClick(deck)]),
+                console.log('Dealer hand is ', dealerHand);
+            }}
+          >
             <boxGeometry args={[50, 10, 10]} />
           </mesh>
         </Canvas>
