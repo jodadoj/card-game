@@ -101,20 +101,20 @@ function App(): JSX.Element {
             <OrbitControls />
             <ambientLight intensity={1} />
             <group scale={[10, 10, 10]}>
-              {playerHand.map((card, i) => {
-                return (
-                  <CardModel
-                    card={card}
-                    key={card.id}
-                    position={[
-                      i * 2 - playerHand.length / 2,
-                      0,
-                      Math.random() * 0.25 - 0.125
-                    ]}
-                  />
-                );
-              })}
-              ;
+              {playerHand[0] &&
+                playerHand.map((card, i) => {
+                  return (
+                    <CardModel
+                      card={card}
+                      key={card.id}
+                      position={[
+                        i * 2 - playerHand.length / 2,
+                        0,
+                        Math.random() * 0.25 - 0.125
+                      ]}
+                    />
+                  );
+                })}
             </group>
           </Canvas>
         </div>
@@ -125,20 +125,20 @@ function App(): JSX.Element {
             <OrbitControls />
             <ambientLight intensity={1} />
             <group scale={[10, 10, 10]}>
-              {dealerHand.map((card, i) => {
-                return (
-                  <CardModel
-                    card={card}
-                    key={card.id}
-                    position={[
-                      i * 2 - dealerHand.length / 2,
-                      0,
-                      Math.random() * 0.25 - 0.125
-                    ]}
-                  />
-                );
-              })}
-              ;
+              {dealerHand[0] &&
+                dealerHand.map((card, i) => {
+                  return (
+                    <CardModel
+                      card={card}
+                      key={card.id}
+                      position={[
+                        i * 2 - dealerHand.length / 2,
+                        0,
+                        Math.random() * 0.25 - 0.125
+                      ]}
+                    />
+                  );
+                })}
             </group>
           </Canvas>
         </div>
