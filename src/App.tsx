@@ -1,11 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 //const Card = require('./card.js');
-import {
-  Card,
-  createShuffledIdDeck,
-  IdCard as IdCard,
-  shuffleDeck
-} from './deck';
+import { createShuffledIdDeck, IdCard } from './deck';
 import React, { useState } from 'react';
 import { HandView } from './HandView';
 import { CardView } from './CardView';
@@ -185,32 +180,40 @@ function App(): JSX.Element {
         </div>
       </div>
       <div className="ctn-options">
-        <Canvas camera={{ position: [0, -50, 0] }}>
-          <fogExp2 attach="fog" color="white" density={0.001} />
+        <Canvas camera={{ position: [0, -10, 0] }}>
           <ambientLight intensity={1} />
           <mesh
             position={[0, 0, 0]}
+            scale={[2, 2, 2]}
+            rotation={[Math.PI / 2, 0, 0]}
             onClick={(e) => {
               setPlayerHand([...playerHand, handleCardClick(deck)]),
                 console.log('Player hand is ', playerHand);
             }}
           >
-            <boxGeometry args={[50, 10, 10]} />
+            <Text3D font={'./fonts/Roboto Mono_Bold.json'}>
+              Deal player
+              <meshStandardMaterial color={0xdb1f48} />
+            </Text3D>
           </mesh>
         </Canvas>
       </div>
       <div className="ctn-score">
-        <Canvas camera={{ position: [0, -50, 0] }}>
-          <fogExp2 attach="fog" color="white" density={0.001} />
+        <Canvas camera={{ position: [0, -10, 0] }}>
           <ambientLight intensity={1} />
           <mesh
             position={[0, 0, 0]}
+            scale={[2, 2, 2]}
+            rotation={[Math.PI / 2, 0, 0]}
             onClick={(e) => {
               setDealerHand([...dealerHand, handleCardClick(deck)]),
                 console.log('Dealer hand is ', dealerHand);
             }}
           >
-            <boxGeometry args={[50, 10, 10]} />
+            <Text3D font={'./fonts/Roboto Mono_Bold.json'}>
+              Deal dealer
+              <meshStandardMaterial color={0xdb1f48} />
+            </Text3D>
           </mesh>
         </Canvas>
       </div>
