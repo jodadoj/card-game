@@ -19,6 +19,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import CardModel from './CardModel';
 import { King } from './King';
 import { Fog } from 'three';
+import { Blackjack } from './Blackjack';
 
 function App(): JSX.Element {
   // const [deck,setDeck] = useState<Card[]>(createDeckArray());
@@ -150,34 +151,13 @@ function App(): JSX.Element {
             </group>
           </Canvas>
         </div>
-      </div> */}
+      </div> 
+        {setPlayerHand([...playerHand, handleCardClick(deck)])}
+        {setPlayerHand([...playerHand, handleCardClick(deck)])}
+        {setDealerHand([...dealerHand, handleCardClick(deck)])}
+        {setDealerHand([...dealerHand, handleCardClick(deck)])}*/}
       <div className="ctn-totals">
-        <div className="canvas-container">
-          <p>{JSON.stringify(playerHand)}</p>
-          <p>{JSON.stringify(dealerHand)}</p>
-          <p>
-            Player score:{' '}
-            {playerHand[0] &&
-              playerHand
-                .map((card) => {
-                  return Array.isArray(card.value) ? card.value[0] : 10;
-                })
-                .reduce((total, current) => {
-                  return total + current;
-                })}
-          </p>
-          <p>
-            Dealer score:{' '}
-            {dealerHand[0] &&
-              dealerHand
-                .map((card) => {
-                  return Array.isArray(card.value) ? card.value[0] : 10;
-                })
-                .reduce((total, current) => {
-                  return total + current;
-                })}
-          </p>
-        </div>
+        <Blackjack playerHand={playerHand} dealerHand={dealerHand} />
       </div>
       <div className="ctn-options">
         <Canvas camera={{ position: [0, -10, 0] }}>

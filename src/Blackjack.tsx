@@ -1,5 +1,109 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-export function blackjack(): void {}
+
+import { IdCard } from './deck';
+
+interface BlackjackProps {
+  playerHand: IdCard[];
+  dealerHand: IdCard[];
+}
+
+export function Blackjack(props: BlackjackProps): JSX.Element {
+  const playerHand = props.playerHand;
+  const dealerHand = props.dealerHand;
+
+  let gamestate = 'DEALER TURN!';
+
+  let playerScore: number | string =
+    playerHand.length <= 0
+      ? 0
+      : playerHand
+          .map((card) => {
+            if (Object.keys(card.value)[0] === 'Ace') {
+              return 11;
+            }
+            return Array.isArray(card.value) ? card.value[0] : 10;
+          })
+          .reduce((total, current) => {
+            return total + current;
+          });
+
+  let dealerScore: number | string =
+    dealerHand.length <= 0
+      ? 0
+      : dealerHand
+          .map((card) => {
+            if (Object.keys(card.value)[0] === 'Ace') {
+              return 11;
+            }
+            return Array.isArray(card.value) ? card.value[0] : 10;
+          })
+          .reduce((total, current) => {
+            return total + current;
+          });
+
+  if (dealerScore > 21) {
+    const dealerAces = dealerHand.filter(
+      (card) =>
+        !Array.isArray(card.value) && Object.keys(card.value)[0] === 'Ace'
+    );
+    dealerScore =
+      typeof dealerScore === 'number'
+        ? dealerScore - 10 * dealerAces.length
+        : 'BUST!';
+    if (dealerScore > 21) {
+      dealerScore = 'BUST!';
+      gamestate = 'PLAYER WINS';
+    }
+  }
+  if (dealerScore < 17) {
+    dealerScore = 'DEAL AGAIN!';
+    gamestate = 'DEALER TURN';
+  }
+  if (dealerScore > 16 && dealerScore !== 'BUST!') {
+    gamestate = 'PLAYER TURN';
+  }
+
+  if (playerScore > 21) {
+    const playerAces = playerHand.filter(
+      (card) =>
+        !Array.isArray(card.value) && Object.keys(card.value)[0] === 'Ace'
+    );
+    playerScore = playerScore - 10 * playerAces.length;
+    if (playerScore > 21) {
+      playerScore = 'BUST!';
+      gamestate = 'PLAYER LOSS';
+    }
+  }
+
+  if (playerHand.length > 4 && playerScore < 22) {
+    playerScore = '5 UNDER! WIN!';
+    gamestate = 'PLAYER WINS';
+  }
+
+  return (
+    <div className="canvas-container">
+      <p>
+        Player cards:{' '}
+        {playerHand.map((card) => {
+          return Array.isArray(card.value)
+            ? card.value[0] + ' ' + card.suit
+            : Object.keys(card.value)[0] + ' ' + card.suit;
+        })}
+      </p>
+      <p>
+        Dealer cards:{' '}
+        {dealerHand.map((card) => {
+          return Array.isArray(card.value)
+            ? card.value[0] + ' ' + card.suit
+            : Object.keys(card.value)[0] + ' ' + card.suit;
+        })}
+      </p>
+      <p>Player score: {playerScore}</p>
+      <p>Dealer score: {dealerScore}</p>
+      <p>{gamestate}</p>
+    </div>
+  );
+}
 
 /* eslint-enable @typescript-eslint/no-empty-function */
 
