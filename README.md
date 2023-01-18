@@ -30,6 +30,8 @@ Mammon is many interpretations regretful of his status as a fallen angel and is 
 
 Current MVP design is simply a yellow version of the player model, can add lights around him for effect
 
+![mammon](/images/ezgif-4-fd552bb483.gif "mammon first try")
+
 A full MVP would likely want to see a a better Mammon render as the "main character" of the "storyline"
 
 # Enviroment
