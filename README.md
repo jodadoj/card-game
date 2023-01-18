@@ -2,7 +2,7 @@
 
 ![spincard](/images/ezgif-4-eef81e31d8.gif "spinning card")
 
-# [Live demo](https://antemortem.netlify.app/) 
+# [Trial pre alpha demo](https://antemortem.netlify.app/) 
 
 # Working title is "Ante-mortem"
 
