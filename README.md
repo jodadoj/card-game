@@ -1,5 +1,7 @@
 # card-game
 
+![spincard](/images/ezgif-4-eef81e31d8.gif "spinning card")
+
 # Working title is "Ante-mortem"
 
 [Antemortem](https://medical-dictionary.thefreedictionary.com/ante+mortem) being the states preceeding death and a pun on the term [ante](https://www.thefreedictionary.com/ante) in poker.
