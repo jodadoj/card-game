@@ -4,6 +4,10 @@
 
 # [Trial pre alpha demo](https://antemortem.netlify.app/) 
 
+Currently implemented systems include deck functionality, basic camera setup and blackjack ruleset.
+
+![blackjackalpha](/images/blackjack-demo.png "blackjack")
+
 # Working title is "Ante-mortem"
 
 [Antemortem](https://medical-dictionary.thefreedictionary.com/ante+mortem) being the states preceeding death and a pun on the term [ante](https://www.thefreedictionary.com/ante) in poker.
@@ -49,26 +53,16 @@ Generally inspired by depiction of the [Fourth Cicle of Hell](<https://en.wikipe
 
 Dammed are watched by unseen entities in a dimly lit room as the surround a table with a flame under a chandelier
 
-Light assets? Maybe actual eyes later but dim lights that move should be enough
+Light assets? Possibly actual eyes later but dim lights that move should be enough
 The fire should represent the [Morning Star](https://en.wikipedia.org/wiki/Lucifer) as the symbol of Lucifer, King of Hell, and pride
 
-Everything on the table comes from and dissapears into the fire
+Everything on the table comes from and dissapears into the fire - a simple asset (perhaps another bright light) but pivotal to the game structure as a major piece
 
-A simple asset (perhaps another bright light) but pivotal to the game structure as a major piece
-
-Also important are the mechanics of the play table
-
-The outer and inner sections of the table should eventually spin in opposite directions and differing speeds
-
-A large sound and visual aid for distinct game phases, not a priority but still should be implemented in MVP
+Also important are the mechanics of the play table: The outer and inner layers of the table should eventually spin in opposite directions and differing speeds. A large sound and visual aid for distinct game phases, not a priority but still plannedt to be implemented in MVP.
 
 Each player (refered to henceforth as the dammed) has different colours and possibly clothing (later build, easy to control material colour first via props)
 
-When dammed lose they are burned by the flame in the center by Mammon pointing at them
-
-MVP doesn't need burning animation, sfx and light flash is enough
-
-Symbolism is a of Pride becoming [Wrath](https://en.wikipedia.org/wiki/Satan) as they drop out
+When dammed lose they are burned by the flame in the center by Mammon pointing at them though MVP doesn't need burning animation, sfx and light flash is enough - Pride becoming [Wrath](https://en.wikipedia.org/wiki/Satan) as they drop out.
 
 # Start game options
 
