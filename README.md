@@ -29,7 +29,7 @@ An endless loop of winning and losing time in hell
 Game master is [Mammon](https://en.wikipedia.org/wiki/Mammon) - one of the biblical Princes of Hell and ruler of the circle of greed
 
 
-![mammon](/images/mammon 001.jpeg "mammon")
+![mammonface](/images/mammon 001.jpeg "mammon")
 
 > Lay not up for yourselves treasures upon earth, where moth and rust doth corrupt, and where thieves break through and steal: But lay up for yourselves treasures in heaven, where neither moth nor rust doth corrupt, and where thieves do not break through nor steal: For where your treasure is, there will your heart be also. No man can serve two masters: for either he will hate the one, and love the other; or else he will hold to the one, and despise the other. Ye cannot serve God and mammon. — Matthew 6:19–21, 24 (KJV)`
 
@@ -143,7 +143,7 @@ When a dammed loses the game they are removed from the designation of player in 
 He usually hangs above and will point at losing players for drama and flow
 
 
-![mammon](/images/mammon 002.jpeg "mammon pointing")
+![mammonpoint](/images/mammon 002.jpeg "mammon pointing")
 
 Destroys their physical presence completely leaving a floating blob (this is a spectator hearby refered to as a lost soul)
 
