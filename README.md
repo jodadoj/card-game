@@ -34,7 +34,7 @@ Concept art designs are thus far a long, greasy haired boy with glowing red eyes
 
 Mammon is many interpretations regretful of his status as a fallen angel and is also replaced by [Plutus](https://en.wikipedia.org/wiki/Plutus) at points usually depicted as youthful if not an infant which inspires this description
 
-Current MVP design is simply a yellow version of the player model, can add lights around him for effect
+Current MVP design is simply a yellow version of the player model, can add lights around him for effect. Below is a rigging test for example:
 
 ![mammon](/images/ezgif-4-fd552bb483.gif "mammon first try")
 
