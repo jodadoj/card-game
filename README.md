@@ -16,6 +16,8 @@ Generally designed as a possible board game and moved into the digital arena, th
 
 ## Premise:
 
+![fourthcircle](/images/9-circles-of-hell-dantes-inferno-4-circles-.jpg "sinners in the fourth circle")
+
 Background: A mystical games for money and souls in hell
 
 Players are dammed entities that must gamble with their lives in order to be released from purgatory, the dammed
