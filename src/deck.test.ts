@@ -2,7 +2,8 @@ import {
   Card,
   createDeckArray,
   createMarkedDeck,
-  idCard,
+  createShuffledIdDeck,
+  IdCard,
   shuffleDeck
 } from './deck';
 import { it, describe, expect, expectTypeOf } from 'vitest';
@@ -42,11 +43,12 @@ describe('What object is created by createDeck?', () => {
   });
 
   it('shuffles the deck', () => {
-    const shuffledDeck: idCard[] = shuffleDeck(createMarkedDeck());
+    const shuffledDeck: IdCard[] = shuffleDeck(createMarkedDeck());
     console.table(shuffledDeck);
     const shuffledDeckSize = shuffledDeck.length;
     console.table('the shuffled deck contains ' + shuffledDeckSize + ' cards');
     expect(shuffledDeckSize).toBe(52);
     expectTypeOf(shuffledDeck).toEqualTypeOf<object>;
+    console.log('first card was ', createShuffledIdDeck().pop());
   });
 });

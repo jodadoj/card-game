@@ -5,7 +5,7 @@ export interface Card {
   value: { [face: string]: number[] } | number[];
 }
 
-export interface idCard extends Card {
+export interface IdCard extends Card {
   id: number;
 }
 
@@ -43,14 +43,14 @@ export function createDeckArray(): Card[] {
 
 //-----------------------------------------------------------------want to id every card to allow marking, removing from deck, duplicating etc etc
 
-export function idFreshDeck(freshDeck: Card[]): idCard[] {
-  const idDeck: idCard[] = freshDeck.map((card, index): idCard => {
+export function idFreshDeck(freshDeck: Card[]): IdCard[] {
+  const idDeck: IdCard[] = freshDeck.map((card, index): IdCard => {
     return Object.assign({ id: index }, card);
   });
   return idDeck;
 }
 
-export function createMarkedDeck(): idCard[] {
+export function createMarkedDeck(): IdCard[] {
   return idFreshDeck(createDeckArray());
 }
 
@@ -78,7 +78,7 @@ export function createShuffledIdDeck() {
 //      j ← random integer such that 0 ≤ j ≤ i
 //      exchange a[j] and a[i]
 
-export function shuffleDeck(unshuffledDeck: idCard[]): idCard[] {
+export function shuffleDeck(unshuffledDeck: IdCard[]): IdCard[] {
   const shuffledDeck = unshuffledDeck;
   for (
     let currentCard = shuffledDeck.length - 1;
