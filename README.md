@@ -10,7 +10,7 @@ Currently implemented systems include deck functionality, basic camera setup and
 
 ![blackjackalpha](/images/blackjack-demo.png "blackjack")
 
-## [Deck printiing](https://63c09aa8a0976e000858e30f--antemortem.netlify.app/)
+## [Deck printing](https://63c09aa8a0976e000858e30f--antemortem.netlify.app/)
 
 The printing of the full shuffled deck working under the surface as text
 
