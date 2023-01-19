@@ -47,7 +47,7 @@ Game master is [Mammon](https://en.wikipedia.org/wiki/Mammon) - one of the bibli
 
 Concept art designs are thus far a long, greasy haired boy with glowing red eyes, golden wings bound by heavy jewelery and tight rings that turn his skin blue and red. His model sits on a chandelier above the play area.
 
-Mammon is many interpretations regretful of his status as a fallen angel and is also replaced by [Plutus](https://en.wikipedia.org/wiki/Plutus) at points usually depicted as youthful if not an infant which inspires this description
+Mammon is in many interpretations described as regretful of his status as a fallen angel and is also replaced by [Plutus](https://en.wikipedia.org/wiki/Plutus) at points, usually depicted as youthful if not as an infant which inspires this description.
 
 Current MVP design is simply a yellow version of the player model, can add lights around him for effect. Below is a rigging test for example:
 
