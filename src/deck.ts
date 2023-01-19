@@ -15,11 +15,11 @@ const differentValues: {
   number: number[][];
 } = {
   face: [
-    { King: [10, 14] },
-    { Queen: [10, 13] },
+    { King: [10, 13] },
+    { Queen: [10, 12] },
 
-    { Jack: [10, 12] },
-    { Ace: [1, 11] }
+    { Jack: [10, 11] },
+    { Ace: [1, 14] }
   ],
 
   //can just have a face and have a seperate getValue function
@@ -45,7 +45,11 @@ export function createDeckArray(): Card[] {
 
 export function idFreshDeck(freshDeck: Card[]): IdCard[] {
   const idDeck: IdCard[] = freshDeck.map((card, index): IdCard => {
-    return Object.assign({ id: index }, card);
+    return Object.assign(
+      { id: index },
+      { suit: card.suit },
+      { value: card.value }
+    );
   });
   return idDeck;
 }
