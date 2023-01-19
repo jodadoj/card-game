@@ -2,11 +2,19 @@
 
 ![spincard](/images/ezgif-4-eef81e31d8.gif "spinning card")
 
-# [Trial pre alpha demo](https://antemortem.netlify.app/) 
+#Progression
+
+## [Blackjack pre alpha demo](https://antemortem.netlify.app/) 
 
 Currently implemented systems include deck functionality, basic camera setup and blackjack ruleset.
 
 ![blackjackalpha](/images/blackjack-demo.png "blackjack")
+
+## [Deck printiing](https://63c09aa8a0976e000858e30f--antemortem.netlify.app/)
+
+The printing of the full shuffled deck working under the surface as text
+
+![deckPrint](/images/firstDeckDisplay.png "deck print")
 
 # Working title is "Ante-mortem"
 
