@@ -2,7 +2,7 @@
 
 ![spincard](/images/ezgif-4-eef81e31d8.gif "spinning card")
 
-#Progression
+# Progression
 
 ## [Blackjack pre alpha demo](https://antemortem.netlify.app/) 
 
