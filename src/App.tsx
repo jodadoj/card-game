@@ -158,6 +158,15 @@ function App(): JSX.Element {
         {setDealerHand([...dealerHand, handleCardClick(deck)])}*/}
       <div className="ctn-totals">
         <Blackjack playerHand={playerHand} dealerHand={dealerHand} />
+        <button
+          onClick={(e) => {
+            setPlayerHand([]);
+            setDealerHand([]);
+            setDeck(createShuffledIdDeck());
+          }}
+        >
+          RESET
+        </button>
       </div>
       <div className="ctn-options">
         <Canvas camera={{ position: [0, -10, 0] }}>

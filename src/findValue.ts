@@ -5,7 +5,9 @@ export function findValue(card: IdCard): number[] {
     return card.value;
   }
 
-  return card.value.face;
+  const face: string = Object.keys(card.value)[0];
+
+  return card.value[face];
 }
 
 export function findName(card: IdCard): number | string {
@@ -21,8 +23,9 @@ export function findHighValue(card: IdCard): number {
   if (Array.isArray(card.value)) {
     return card.value[0];
   }
+  const face: string = Object.keys(card.value)[0];
 
-  return card.value.face[1];
+  return card.value[face][1];
 }
 
 export function findWrappedValue(card: IdCard): number {
@@ -30,5 +33,7 @@ export function findWrappedValue(card: IdCard): number {
     return card.value[0];
   }
 
-  return card.value.face[1] - 13;
+  const face: string = Object.keys(card.value)[0];
+
+  return card.value[face][1] - 13;
 }
