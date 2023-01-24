@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 //const Card = require('./card.js');
 import { createShuffledIdDeck, IdCard } from './deck';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { HandView } from './HandView';
 import { CardView } from './CardView';
 import { Canvas, Euler } from '@react-three/fiber';
@@ -20,6 +20,11 @@ import CardModel from './CardModel';
 import { King } from './King';
 import { Fog } from 'three';
 import { Blackjack } from './Blackjack';
+import { io } from 'socket.io-client';
+
+const URL = 'https://socketioserverts.jodadoj.repl.co';
+const socket = io(URL);
+//-----------------------------------------------------do in useEffect
 
 function App(): JSX.Element {
   // const [deck,setDeck] = useState<Card[]>(createDeckArray());
@@ -47,6 +52,14 @@ function App(): JSX.Element {
   const [dealerHand, setDealerHand] = useState<IdCard[]>([]);
 
   const [deck, setDeck] = useState<IdCard[]>(createShuffledIdDeck());
+  const [remainingCards, setRemainingCards] = useState<number | null>(null);
+
+  useEffect(() => {
+    socket.on('game-update', (rc) => {
+      console.log('game-update recieved dealer'), setRemainingCards(rc);
+    }); //-------------------------------------------------------------desubscribe and disconnect on component unmount
+  }, []);
+
   // const playerCard: IdCard = { id: 0, suit: '', value: [] };
   // const dealerCard: IdCard = { id: 0, suit: '', value: [] };
 
@@ -160,12 +173,12 @@ function App(): JSX.Element {
         <Blackjack playerHand={playerHand} dealerHand={dealerHand} />
         <button
           onClick={(e) => {
-            setPlayerHand([]);
-            setDealerHand([]);
-            setDeck(createShuffledIdDeck());
+            socket.emit('reset-requested'), console.log('sent "rr"');
           }}
         >
-          RESET
+          {remainingCards
+            ? 'RESET - current count is ' + remainingCards
+            : 'RESET - no remaining cards'}
         </button>
       </div>
       <div className="ctn-options">
@@ -176,8 +189,12 @@ function App(): JSX.Element {
             scale={[2, 2, 2]}
             rotation={[Math.PI / 2, 0, 0]}
             onClick={(e) => {
-              setPlayerHand([...playerHand, handleCardClick(deck)]),
-                console.log('Player hand is ', playerHand);
+              socket.emit('twist-requested'),
+                console.log('sent "tr"'),
+                socket.on('game-update', (rc) => {
+                  console.log('game-update recieved player'),
+                    setRemainingCards(rc);
+                });
             }}
           >
             <Text3D font={'./fonts/Roboto Mono_Bold.json'}>
@@ -195,8 +212,7 @@ function App(): JSX.Element {
             scale={[2, 2, 2]}
             rotation={[Math.PI / 2, 0, 0]}
             onClick={(e) => {
-              setDealerHand([...dealerHand, handleCardClick(deck)]),
-                console.log('Dealer hand is ', dealerHand);
+              socket.emit('twist-requested'), console.log('sent "tr"');
             }}
           >
             <Text3D font={'./fonts/Roboto Mono_Bold.json'}>
