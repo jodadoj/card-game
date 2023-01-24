@@ -1,6 +1,8 @@
 # card-game
 
-![spincard](/images/ezgif-4-eef81e31d8.gif "spinning card")
+![spincard](/images/ezgif-4-eef81e31d8.gif 'spinning card')
+
+# [Trial pre alpha demo](https://antemortem.netlify.app/)
 
 # Progression
 
@@ -8,7 +10,7 @@
 
 Currently implemented systems include deck functionality, basic camera setup and blackjack ruleset.
 
-![blackjackalpha](/images/blackjack-demo.png "blackjack")
+![blackjackalpha](/images/blackjack-demo.png 'blackjack')
 
 ## [Deck printing](https://63c09aa8a0976e000858e30f--antemortem.netlify.app/)
 
@@ -30,7 +32,7 @@ Generally designed as a possible board game and moved into the digital arena, th
 
 ## Premise:
 
-![fourthcircle](/images/9-circles-of-hell-dantes-inferno-4-circles-.jpg "sinners in the fourth circle")
+![fourthcircle](/images/9-circles-of-hell-dantes-inferno-4-circles-.jpg 'sinners in the fourth circle')
 
 Background: A mystical games for money and souls in hell
 
@@ -39,7 +41,6 @@ Players are dammed entities that must gamble with their lives in order to be rel
 An endless loop of winning and losing time in hell
 
 Game master is [Mammon](https://en.wikipedia.org/wiki/Mammon) - one of the biblical Princes of Hell and ruler of the circle of greed
-
 
 ![mammonface](/images/mammon-001.jpeg)
 
@@ -51,7 +52,7 @@ Mammon is in many interpretations described as regretful of his status as a fall
 
 Current MVP design is simply a yellow version of the player model, can add lights around him for effect. Below is a rigging test for example:
 
-![mammon](/images/ezgif-4-fd552bb483.gif "mammon first try")
+![mammon](/images/ezgif-4-fd552bb483.gif 'mammon first try')
 
 A full MVP would likely want to see a a better Mammon render as the "main character" of the "storyline"
 
@@ -144,8 +145,7 @@ When a dammed loses the game they are removed from the designation of player in 
 
 He usually hangs above and will point at losing players for drama and flow
 
-
-![mammonpoint](/images/mammon-002.jpeg "mammon pointing")
+![mammonpoint](/images/mammon-002.jpeg 'mammon pointing')
 
 Destroys their physical presence completely leaving a floating blob (this is a spectator hearby refered to as a lost soul)
 
@@ -260,9 +260,9 @@ In later builds dammed should be given random insecentives by kings and princes 
     	This of these as the extended roles in mafia
 
     	Not necessarily a crime to fulfil these tasks and dammed should be able to reveal their contracts but they should create a target on their backs in some way through game theory
-        
+
         Current ideas include:
-        
+
         Belphagor - playing without cheating for a few rounds in exchange for secret immunity from losing with a low hand
         Leviathan - particapating successful accusations in exchange for extra goods to cheat
         Lilith - making pacts in exchange for extra information

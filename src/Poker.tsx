@@ -1,31 +1,176 @@
 import { IdCard } from './deck';
-import { findValue } from './findValue';
+import { findSuit } from './findSuit.ts';
+import { findHighValue, findWrappedValue } from './findValue';
 interface PokerProps {
   playerHands: IdCard[][];
 }
 
-export function isFlush(hand: IdCard[]): boolean {
-  const i = 0;
-  const currentSuit: string = hand[i].suit;
-  const matchingSuits = hand.filter((card) => {
-    card.suit === currentSuit;
-  });
-  if (matchingSuits.length == 5) {
-    const handValues: number[] = matchingSuits.map((card) => {
-      const currentValue: number = findValue(card).slice(-1)[0];
-      return currentValue === 11 ? 1 : currentValue;
-    });
-  }
-  return false;
+export interface handScore {
+  highcard: number;
+  straight: number[];
+  flush: string[];
+  fourOf: number[];
+  fullHouse: number[];
+  twoPair: number[];
+  threeOf: number[];
+  pair: number[];
 }
-//at some point allow Aces to wrap around
+
+export interface handResult {
+  highcard: number;
+  straight: boolean;
+  flush: boolean;
+  fourOf: boolean;
+  fullHouse: boolean;
+  twoPair: boolean;
+  threeOf: boolean;
+  pair: boolean;
+}
+
+export type HashMap<T> = { [key: string]: T };
+
+// export function isFlush(hand: IdCard[]): boolean {
+//   const i = 0;
+//   const currentSuit: string = hand[i].suit;
+//   const matchingSuits = hand.filter((card) => {
+//     card.suit === currentSuit;
+//   });
+//   if (matchingSuits.length == 5) {
+//   }
+//   return false;
+// }
+
+export function getValues(hand: IdCard[]): number[] {
+  return hand.map((card) => {
+    return findHighValue(card);
+  });
+}
+
+export function getWrappedValues(hand: IdCard[]): number[] {
+  return hand.map((card) => {
+    return findWrappedValue(card);
+  });
+}
+
+export function checkHand(hand: IdCard[], wrapAces = false): handResult {
+  const valueHash: Record<number, number> = {}; //create empty objects
+  const suitHash: Record<string, number> = {};
+  // let result:Record<string, number[]|string[]>={};
+  const result: handScore = {
+    highcard: -1,
+    straight: [],
+    flush: [],
+    fourOf: [],
+    fullHouse: [],
+    twoPair: [],
+    threeOf: [],
+    pair: []
+  };
+
+  for (const card of hand) {
+    if (!valueHash[findHighValue(card)]) {
+      valueHash[findHighValue(card)] = 1;
+    } else {
+      valueHash[findHighValue(card)] += 1;
+    }
+    if (!suitHash[findSuit(card)]) {
+      suitHash[findSuit(card)] = 1;
+    } else {
+      suitHash[findSuit(card)] += 1;
+    }
+  }
+  for (const [key, value] of Object.entries(suitHash)) {
+    if (value === 5) {
+      // result['flush']=[];
+      result.flush.push(key);
+    }
+  }
+  for (const [key, value] of Object.entries(valueHash)) {
+    if (value === 2) {
+      // if(!result['pair']){
+      // result['pair']=[];
+      result.pair.push(Number(key));
+      // }
+    }
+    if (value === 3) {
+      // if(!result['threeOf']){
+      // result['threeOf']=[];
+      result.threeOf.push(Number(key));
+      // }
+    }
+    if (value === 4) {
+      // if(!result['fourOf']){
+      // result['fourOf']=[];
+      result.fourOf.push(Number(key));
+      // }
+    }
+  }
+  let prevValue = 0;
+  let isStraight = true;
+  //if the array included a 2, an Ace and a King
+  //maybe do typeof like typeof(valueHash[2]) === 'number'
+  if (wrapAces && valueHash[2] && valueHash[14] && valueHash[13]) {
+    const wrappedValues: number[] = getWrappedValues(hand).sort();
+    // if(!result['highcard']){
+    if (result.highcard == -1) {
+      // result['highcard']=[];
+      result.highcard = wrappedValues[4];
+    }
+    prevValue = wrappedValues[0] - 1;
+    for (const current of wrappedValues) {
+      if (current !== prevValue + 1) {
+        isStraight = false;
+      }
+      prevValue++;
+    }
+    if (isStraight) {
+      // if(!result['straight']){
+      // result['straight']=[];
+      result.straight.push(result.highcard);
+      // }
+    }
+  } else {
+    const sortedValues: number[] = getValues(hand).sort();
+    // if(!result['highcard']){
+    if (result.highcard == -1) {
+      // result['highcard']=[]
+      result.highcard = sortedValues[4];
+    }
+    prevValue = sortedValues[0] - 1;
+    for (const current of sortedValues) {
+      if (current !== prevValue + 1) {
+        isStraight = false;
+      }
+      prevValue++;
+    }
+    if (isStraight) {
+      // if(!result['straight']){
+      // result['straight']=[];
+      result.straight.push(result.highcard);
+      // }
+    }
+  }
+
+  console.table(result);
+
+  return {
+    highcard: result.highcard,
+    straight: result.straight.push() !== undefined,
+    flush: result.flush.push() !== undefined,
+    fourOf: result.fourOf.push() !== undefined,
+    fullHouse: result.fullHouse.push() !== undefined,
+    twoPair: result.twoPair.push() !== undefined,
+    threeOf: result.threeOf.push() !== undefined,
+    pair: result.pair.push() !== undefined && result.pair.push() !== 1
+  };
+}
 
 export function Poker(props: PokerProps): JSX.Element {
   const playerHands: IdCard[][] = props.playerHands;
 
   const handScore: string[] = [];
   for (const hand in playerHands) {
-    handScore[hand] = isFlush(playerHands[hand]) ? 'Flush' : '';
+    handScore[hand] = checkHand(playerHands[hand]) ? 'Flush' : '';
   }
 
   //sort by correctId then see if the last id matches the next or is ascending/descending
@@ -65,3 +210,119 @@ export function Poker(props: PokerProps): JSX.Element {
 
 // Straight flush: 5 cards of the same suit with consecutive values.
 // Ranked by the highest card in the hand.
+
+// I think it's correct to use a hash map here
+
+/*
+
+function checkHand(hand:IdCard[], wrapAces:boolean=false):string{
+
+    let valueHash:Record<number, number>={}; //create empty objects
+    let suitHash:Record<string, number>={};
+    let result:Record<string, <number|string>[]>={}};
+
+    for (let card of hand){
+        if (!valueHash[findHighValue(card)]){
+            valueHash[findHighValue(card)]=1;
+        }
+        else{
+            valueHash[findHighValue(card)]+=1;
+        }
+        if (!suitHash[findSuit(card)]){
+            suitHash[findSuit(card)]=1;
+        }
+        else{
+            suitHash[findSuit(card)]+=1;
+        }
+    }
+    for (const [key,value] of Object.entries(suitHash)){
+        if (value === 5){
+            result[flush]=[];
+            result.flush.push(key);
+        }
+    }
+    for (const [key,value] of Object.entries(valueHash)){
+        if (value === 2){
+            if(!result[pair]){
+                result[pair]=[];
+                result.pair.push(key);
+            }
+        }
+        if (value === 3){
+            if(!result[threeOf]){
+                result[threeOf]=[];
+                result.threeOf.push(key);
+            }
+        }
+        if (value === 4){
+            if(!result[fourOf]){
+                result[fourOf]=[];
+                result.fourOf.push(key);
+            }
+        }
+    }
+    let prevValue = 0;
+    let isStraight = true;
+    if (wrapAces && valueHash[2] && valueHash[14] && valueHash[13]){
+        const wrappedValues:IdCard[] = getWrappedValues(hand).sort();
+        if(!result[highCard]){
+            result[highCard]=[]
+            result.highCard.push(wrappedValues[4])
+        }
+        prevValue = wrappedValues[0]-1;
+        for (const current of wrappedValues){
+            if(current !== prevValue+1){
+                isStraight = false;
+            }
+            prevValue++;
+        }
+        if (isStraight){
+            if (value === 2){
+                if(!result[straight]){
+                    result[straight]=[];
+                    result.straight.push(result.highcard[0]);
+                }
+            }
+        }
+    }
+    else{
+        const sortedValues:IdCard[] = getValues(hand).sort();
+        if(!result[highCard]){
+            result[highCard]=[]
+            result.highCard.push(wrappedValues[4])
+        }
+        prevValue = sortedValues[0]-1;
+        for (const current of sortedValues){
+            if(current !== prevValue+1){
+                isStraight = false;
+            }
+            prevValue++;
+        }
+        if (isStraight){
+            if (value === 2){
+                if(!result[straight]){
+                    result[straight]=[];
+                    result.straight.push(result.highcard[0]);
+                }
+            }
+        }
+    }
+
+    let handScore = {
+        highcard: result.highCard[0];
+        straight: (result[straight]));
+        flush: (result[straight]);
+        fourOf: (result[straight]);
+        fullHouse: (result[straight]);
+        twoPair: (result[straight]);
+        threeOf: (result[straight]);
+        pair: (result[pair] && result.pair===1)
+
+
+    }
+    if ()
+
+
+}
+
+*/
