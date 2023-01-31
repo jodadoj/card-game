@@ -67,22 +67,37 @@ export function checkHand(hand: IdCard[], wrapAces = false): handResult {
     pair: []
   };
 
+  console.log('current hand');
+  console.table(hand);
+
   for (const card of hand) {
-    if (!valueHash[findHighValue(card)]) {
-      valueHash[findHighValue(card)] = 1;
-    } else {
-      valueHash[findHighValue(card)] += 1;
+    const currentValue = findHighValue(card);
+    const currentSuit = findSuit(card);
+    if (result.highcard < currentValue) {
+      result.highcard = currentValue;
     }
-    if (!suitHash[findSuit(card)]) {
-      suitHash[findSuit(card)] = 1;
+    if (!valueHash[currentValue]) {
+      valueHash[currentValue] = 1;
     } else {
-      suitHash[findSuit(card)] += 1;
+      valueHash[currentValue] += 1;
+    }
+    if (!suitHash[currentSuit]) {
+      suitHash[currentSuit] = 1;
+    } else {
+      suitHash[currentSuit] += 1;
     }
   }
+
+  console.log('values');
+  console.table(valueHash);
+  console.log('suits');
+  console.table(suitHash);
+
   for (const [key, value] of Object.entries(suitHash)) {
     if (value === 5) {
       // result['flush']=[];
       result.flush.push(key);
+      console.log('Found flush');
     }
   }
   for (const [key, value] of Object.entries(valueHash)) {
@@ -90,32 +105,32 @@ export function checkHand(hand: IdCard[], wrapAces = false): handResult {
       // if(!result['pair']){
       // result['pair']=[];
       result.pair.push(Number(key));
+      console.log('Found pair');
       // }
     }
     if (value === 3) {
       // if(!result['threeOf']){
       // result['threeOf']=[];
       result.threeOf.push(Number(key));
+      console.log('Found Three of a Kind');
       // }
     }
     if (value === 4) {
       // if(!result['fourOf']){
       // result['fourOf']=[];
       result.fourOf.push(Number(key));
+      console.log('Found Four of a Kind');
       // }
     }
   }
   let prevValue = 0;
   let isStraight = true;
+  console.log('looking for straight');
   //if the array included a 2, an Ace and a King
   //maybe do typeof like typeof(valueHash[2]) === 'number'
   if (wrapAces && valueHash[2] && valueHash[14] && valueHash[13]) {
+    console.log('aces wrap around');
     const wrappedValues: number[] = getWrappedValues(hand).sort();
-    // if(!result['highcard']){
-    if (result.highcard == -1) {
-      // result['highcard']=[];
-      result.highcard = wrappedValues[4];
-    }
     prevValue = wrappedValues[0] - 1;
     for (const current of wrappedValues) {
       if (current !== prevValue + 1) {
@@ -130,12 +145,9 @@ export function checkHand(hand: IdCard[], wrapAces = false): handResult {
       // }
     }
   } else {
+    console.log("aces don't wrap");
     const sortedValues: number[] = getValues(hand).sort();
-    // if(!result['highcard']){
-    if (result.highcard == -1) {
-      // result['highcard']=[]
-      result.highcard = sortedValues[4];
-    }
+    console.table(sortedValues);
     prevValue = sortedValues[0] - 1;
     for (const current of sortedValues) {
       if (current !== prevValue + 1) {
@@ -155,13 +167,13 @@ export function checkHand(hand: IdCard[], wrapAces = false): handResult {
 
   return {
     highcard: result.highcard,
-    straight: result.straight.push() !== undefined,
-    flush: result.flush.push() !== undefined,
-    fourOf: result.fourOf.push() !== undefined,
-    fullHouse: result.fullHouse.push() !== undefined,
-    twoPair: result.twoPair.push() !== undefined,
-    threeOf: result.threeOf.push() !== undefined,
-    pair: result.pair.push() !== undefined && result.pair.push() !== 1
+    straight: result.straight.pop() !== undefined,
+    flush: result.flush.pop() !== undefined,
+    fourOf: result.fourOf.pop() !== undefined,
+    fullHouse: result.fullHouse.pop() !== undefined,
+    twoPair: result.twoPair.pop() !== undefined,
+    threeOf: result.threeOf.pop() !== undefined,
+    pair: result.pair.pop() !== undefined && result.pair.pop() !== 1
   };
 }
 
