@@ -6,6 +6,13 @@
 
 # Progression
 
+
+## Online connected deck counter
+
+Tested a version of the deck draw functionality that would simply update with the number of cards remaining in a deck without any models across different browsers - verifying that the system was online
+
+![deckCounter](/images/ezgif-5-3b353b30c5.gif 'counter')
+
 ## [Blackjack pre alpha demo](https://antemortem.netlify.app/) 
 
 Currently implemented systems include deck functionality, basic camera setup and blackjack ruleset.
