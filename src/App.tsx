@@ -22,32 +22,13 @@ import { Fog } from 'three';
 import { Blackjack } from './Blackjack';
 import { io } from 'socket.io-client';
 
-const URL = 'https://socketioserverts.jodadoj.repl.co';
-const socket = io(URL);
+const url = import.meta.env.VITE_SOCKET_URL ?? 'null';
+
+console.log(url);
+
+const socket = io(url);
 //-----------------------------------------------------do in useEffect
-
 function App(): JSX.Element {
-  // const [deck,setDeck] = useState<Card[]>(createDeckArray());
-  // const [hand, setHand] = useState<Card[]>([]);
-
-  //state:
-  //deck:Card[]
-  //hand:Card[]
-
-  const deg2rad = (degrees: number) => {
-    return degrees * (Math.PI / 180);
-  };
-
-  // const Scene = () => {
-  //   useThree(({ camera }) => {
-  //     camera.rotation.set(deg2rad(30), 0, 0);
-  //     camera.position.x = 5;
-  //     camera.position.y = 5;
-  //     camera.position.z = 5;
-
-  //   });
-  // }
-
   const [playerHand, setPlayerHand] = useState<IdCard[]>([]);
   const [dealerHand, setDealerHand] = useState<IdCard[]>([]);
 
@@ -55,19 +36,47 @@ function App(): JSX.Element {
   const [remainingCards, setRemainingCards] = useState<number | null>(null);
 
   useEffect(() => {
-    socket.on('game-update', (rc) => {
-      console.log('game-update recieved dealer'), setRemainingCards(rc);
-    }); //-------------------------------------------------------------desubscribe and disconnect on component unmount
+    socket.on(
+      'game-update',
+      async (rc, globalDeck, globalPlayerHand, globalDealerHand) => {
+        // console.log('game-update recieved dealer'),
+        setRemainingCards(rc),
+          setDeck(globalDeck),
+          setPlayerHand(globalPlayerHand),
+          setDealerHand(globalDealerHand),
+          console.log('ok!');
+        console.table(playerHand), console.table(dealerHand);
+      }
+    );
+    socket.on(
+      'reset-game',
+      async (rc, globalDeck, globalPlayerHand, globalDealerHand) => {
+        // console.log('reset-update'),
+        setRemainingCards(rc),
+          setDeck(globalDeck),
+          setPlayerHand(globalPlayerHand),
+          setDealerHand(globalDealerHand),
+          resetCards();
+      }
+    );
+
+    //-------------------------------------------------------------desubscribe and disconnect on component unmount
   }, []);
 
   // const playerCard: IdCard = { id: 0, suit: '', value: [] };
   // const dealerCard: IdCard = { id: 0, suit: '', value: [] };
 
+  function resetCards() {
+    setDeck(createShuffledIdDeck());
+    setPlayerHand([]);
+    setDealerHand([]);
+  }
+
   function dealCard(currentDeck: IdCard[]): IdCard {
     const newDeck: IdCard[] = [...currentDeck];
     let dealtCard: IdCard = { id: 0, suit: '', value: [] };
     try {
-      if (newDeck.length > 1) {
+      if (newDeck.length > 0) {
         dealtCard = newDeck.pop() as IdCard;
       }
       if (newDeck.length <= 0) {
@@ -79,20 +88,28 @@ function App(): JSX.Element {
     return dealtCard;
   }
 
-  function handleCardClick(currentDeck: IdCard[]): IdCard {
+  function handleCardClick(currentDeck: IdCard[]) {
     const newDeck: IdCard[] = [...currentDeck];
     let dealtCard: IdCard = { id: 0, suit: '', value: [] };
     try {
       dealtCard = dealCard(newDeck);
-      console.log(dealtCard);
+      const playerCard = dealtCard;
       newDeck.pop();
+      dealtCard = dealCard(newDeck);
+      const dealerCard = dealtCard;
+      newDeck.pop();
+      console.table(playerCard);
+      console.table(dealerCard);
+      setPlayerHand([...playerHand, playerCard]);
+      setDealerHand([...dealerHand, dealerCard]);
+      console.log('Hand is', playerHand);
+      console.log('Hand is', dealerHand);
     } catch (error) {
       console.error('Card could not be loaded');
     } finally {
       setDeck([...newDeck]);
-      console.log('Deck is', deck);
+      console.log('Hand is', playerHand);
     }
-    return dealtCard;
   }
 
   // function dealPlayer(currentDeck: IdCard[]):IdCard {
@@ -189,12 +206,11 @@ function App(): JSX.Element {
             scale={[2, 2, 2]}
             rotation={[Math.PI / 2, 0, 0]}
             onClick={(e) => {
-              socket.emit('twist-requested'),
-                console.log('sent "tr"'),
-                socket.on('game-update', (rc) => {
-                  console.log('game-update recieved player'),
-                    setRemainingCards(rc);
-                });
+              console.log('HI!'),
+                handleCardClick(deck),
+                console.table(dealerHand),
+                socket.emit('twist-requested', deck, playerHand, dealerHand),
+                console.log('sent "tr"');
             }}
           >
             <Text3D font={'./fonts/Roboto Mono_Bold.json'}>
@@ -212,7 +228,11 @@ function App(): JSX.Element {
             scale={[2, 2, 2]}
             rotation={[Math.PI / 2, 0, 0]}
             onClick={(e) => {
-              socket.emit('twist-requested'), console.log('sent "tr"');
+              console.log('HI!'),
+                handleCardClick(deck),
+                console.table(dealerHand),
+                socket.emit('twist-requested', deck, playerHand, dealerHand),
+                console.log('sent "tr"');
             }}
           >
             <Text3D font={'./fonts/Roboto Mono_Bold.json'}>
@@ -227,8 +247,3 @@ function App(): JSX.Element {
 }
 
 export default App;
-
-// {createShuffledIdDeck().map((card) => {
-//   return <CardModel key={card.id}> card={card}
-//     onClick={() => console.log(card.suit + " " + card.value)}/>
-//       })}
