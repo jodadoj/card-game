@@ -24,6 +24,9 @@ import { io } from 'socket.io-client';
 import { Trial } from './scenes/trial';
 import { Logo } from './Logo';
 import { LogoUnani } from './LogoUnani';
+import { useFrame } from '@react-three/fiber';
+import { useSpring, animated } from '@react-spring/three';
+import { useRef } from 'react';
 
 const url = import.meta.env.VITE_SOCKET_URL ?? 'null';
 
@@ -37,6 +40,10 @@ function App(): JSX.Element {
 
   const [deck, setDeck] = useState<IdCard[]>(createShuffledIdDeck());
   const [remainingCards, setRemainingCards] = useState<number | null>(null);
+
+  const [logoHovered, setLogoHovered] = useState(false);
+
+  const spin = useSpring({});
 
   useEffect(() => {
     socket.on(
@@ -125,11 +132,17 @@ function App(): JSX.Element {
   // let clicked = false;
 
   return (
-    <div className="ctn-fullscreen-start">
-      <Canvas>
-        <OrbitControls />
+    <div className="ctn-fullscreen">
+      <Canvas
+        onCreated={({ gl }) => {
+          gl.shadowMap.enabled = true;
+          gl.shadowMap.type = THREE.PCFShadowMap;
+        }}
+      >
+        <fog attach="fog" args={['white', 5, 15]} />
         <ambientLight intensity={1} />
-        <LogoUnani />
+        <spotLight penumbra={1} castShadow />
+        <Logo />
       </Canvas>
       {/* <Trial playerHand={playerHand} dealerHand={dealerHand} handleCardClick={handleCardClick} socket={socket} remainingCards={remainingCards}/> */}
     </div>

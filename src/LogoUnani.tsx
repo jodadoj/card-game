@@ -29,7 +29,12 @@ export function LogoUnani(props: JSX.IntrinsicElements['group']) {
     './model/trial logo - no animation.glb'
   ) as unknown as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      position={[-3, 0, 0]}
+      rotation={[Math.PI / 2, 0, 0]}
+    >
       <mesh
         castShadow
         receiveShadow

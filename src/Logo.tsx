@@ -6,6 +6,7 @@ import * as THREE from 'three';
 import React, { useRef } from 'react';
 import { useGLTF, useAnimations } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
+import { useFrame } from '@react-three/fiber';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -39,13 +40,21 @@ type ActionName =
 
 export function Logo() {
   const group = useRef<THREE.Group>();
+
+  useFrame(({ clock }) => {
+    const a = clock.getElapsedTime();
+    if (group.current) {
+      group.current.rotation.x = a;
+    }
+  });
+
   const { nodes, materials } = useGLTF(
     //,animations
     './model/trial logo - animation.glb'
   ) as unknown as GLTFResult;
   //   const { actions } = useAnimations(animations, group);
   return (
-    <group name="Scene">
+    <group name="Scene" position={[-3, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
       <mesh
         name="A"
         castShadow
